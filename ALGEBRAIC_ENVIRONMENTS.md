@@ -21,3 +21,16 @@ over a range of environments where the the symbols are binded to
 values that model a specific concept, e.g., if the mathematical
 objects must form a ring and we apply this environment to the
 aperture, then it becomes a well define closure.
+
+## Means of combination
+Environments, as first-class citizens in Aperture, may be thought
+of as a binary relation of type (symbol,exp*).
+
+As a binary relation, we may take unions, intersections, and other
+set-theoretic operations.
+
+We can also ask whether symbol is related to exp* in either direction,
+or iterate over the elements or ...
+
+
+## Means of abstraction
