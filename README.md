@@ -1,12 +1,10 @@
-# Closures and apertures
+# Aperture
 
-## Closure
 When mathematicans look at a sheet of paper containing math symbols,
 in their minds they have some notion about what the symbols mean.
 In this case, their mental model is providing the binding, the
 *closure*, for these symbols.
 
-## Aperture
 If the mathetican does not know what some of the symbols on the sheet of paper
 mean, then these symbols are free variables, in which case the mathematical
 expression does not have an unambiguous meaning.
@@ -21,7 +19,7 @@ When you evaluate an expression with a closure, the result is a complete
 specification of the program. When we evaluate an expression without a closure,
 the result is an aperture, which is an incomplete program specification.
 
-## Generic programming
+# Generic programming
 Programs can work on expressions, including aperture expressions, so we may also
 think of apertures as a program template "to be filled in" at some later point.
 
