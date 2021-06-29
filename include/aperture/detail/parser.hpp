@@ -23,17 +23,18 @@ namespace aperture::detail
         return std::make_pair(std::sregex_iterator(begin,end,r),std::sregex_iterator());
     }
 
-    exp * atom(std::string const & tok)
+    unique_ptr<exp> atom(std::string const & tok)
     {
-        if (auto result = try_cast<int>(tok); result) return new integer(*result);
-        return new symbol(tok);
+        if (auto res = try_cast<int>(tok); res)
+            return make_unique<integer>(*res);
+        return make_unique<symbol>(tok);
     }
 
     /**
      * I models an input iterator over match_results<I>
      */
     template <typename I>
-    exp * read(I & begin, I end)
+    auto read(I & begin, I end)
     {
         if (begin == end)
             return new unexpected("read", "EOF");
@@ -41,11 +42,11 @@ namespace aperture::detail
         auto tok = *begin++;
         if (tok.str() == "(")
         {
-            auto s = new sexp;
+            auto s = new sexp();
             while (begin->str() != ")")
                 s = prepend(read(begin,end),s);
             ++begin;
-            return s;
+            return unique_ptr<sexp>(s);
         }
 
         if (tok.str() == ")")

@@ -1,7 +1,7 @@
 #pragma once
 #include "exp.hpp"
 
-namespace lamb::detail
+namespace aperture::detail
 {
     struct sexp : exp
     {

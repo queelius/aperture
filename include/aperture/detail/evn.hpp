@@ -37,16 +37,16 @@ namespace aperture::detail
 
     auto sum_int(sexp * xs)
     {
-            int result = 0;
+            int res = 0;
             for (auto i : args->value)
-                result += dynamic_cast<integer*>(i)->value;
-            return new integer(result);
+                res += dynamic_cast<integer*>(i)->value;
+            return make_unique<integer>(res);
     }
 
     auto global_env()
     {
         auto e = new env();
-        e->values["+"] = new proc(&sum_int)
+        e->values["+"] = make_unique<proc>(&sum_int)
 
         return e;
     }
