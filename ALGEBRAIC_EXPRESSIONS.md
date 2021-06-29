@@ -13,8 +13,12 @@ may be lifted to, say, double, or a lamba expression in Aperture may
 be lifted to a standard function (function object) in C++.
 
 ```cpp
-void test()
+// this is not good, revisit
+template <typename T>
+T lift(aperature::exp * e)
 {
+    if (is_type<T>(e))
+        return value(e);
 }
 ```
 
