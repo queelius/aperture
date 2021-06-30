@@ -11,7 +11,7 @@
  * (2) Construct an exp using the JSON serialization
  * of an aperture expression (AST).
  * 
- * (3) In C++, use native functions, like
+ * (3) Write C++ code, using functions like
  *
  *     cons : (exp,exp) -> exp
  * 
@@ -21,32 +21,49 @@
  *     make_proc : F -> exp.
  * 
  * The entire Aperture language set is implemented
- * in C++ so that Aperture programs (abstract syntax trees)
- * can be dynamically built with native C++ code,
- * evaluated,
+ * in this way so that Aperture programs (abstract syntax trees)
+ * can be built directly with C++ code, rather than Aperture.
+ *
+ * To evaluate an Aperature prorgam (AST), the eval function
+ * may be called,
  * 
- *     eval : (exp,env) -> exp,
+ *     eval : (exp,env) -> exp.
  * 
- * applied,
+ * Many evaluations do not change the expression. For instance,
+ * 
+ *     eval : prim<T> -> prim<T>
+ * 
+ * and
+ * 
+ *     eval : (lambda,env) -> lambda.
+ * 
+ * However,
+ * 
+ *     eval : (apply<lambda,exp>,env) -> (prim<T>+exp+symbol+aperture).
+ * 
+ * If we have two expressions, we may try to apply
+ * one expression to the other in the designiated environment,
  *
  *     apply : (exp,exp,env) -> exp,
+ *     apply : (proc,exp,env) -> exp
+ *     apply : (lambda,exp,env) -> exp.
  * 
- * and so on. Any expression exp may in turn
- * be serialized to JSON,
+ * Any expression exp may in turn be serialized to JSON,
  * 
- *     jsonify : exp -> json
+ *     jsonify : exp -> optional<json>
  * 
- * or, if possible, converted into a native type,
+ * or, if possible, converted into a C++ type,
  * 
  *     template <typename T>
- *     as : exp -> T.
+ *     as : exp -> optional<T>.
  *    
  * For instance,
  * 
- *     as<proc_fn<X,Y>> : (lambda + proc) -> fn<X,Y>
+ *     as<proc_fn<X,Y>> : (lambda + proc) -> optional<fn<X,Y>>
  * 
  * is a specialization that takes a lambda or proc
- * expression and maps it to a function object.
+ * expression and maps it to a function object with
+ * an domain X and codomain Y.
  */
 
 #include <memory>
