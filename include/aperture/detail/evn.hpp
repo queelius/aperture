@@ -2,7 +2,6 @@
 #include "proc.hpp"
 #include "exp.hpp"
 #include <string>
-
 namespace aperture::detail
 {
     struct env : exp
@@ -10,7 +9,7 @@ namespace aperture::detail
         std::map<std::string, exp*> values;
         env * parent;
 
-        unique_ptr<exp> clone() const
+        exp * clone() const
         {
             std::map<std::string, exp*> vs;
             for (auto const [k,e] : values)
@@ -34,22 +33,4 @@ namespace aperture::detail
                 nullptr : parent->find(x);
         }
     };
-
-    auto sum_int(sexp * xs)
-    {
-            int res = 0;
-            for (auto i : args->value)
-                res += dynamic_cast<integer*>(i)->value;
-            return make_unique<integer>(res);
-    }
-
-    auto global_env()
-    {
-        auto e = new env();
-        e->values["+"] = make_unique<proc>(&sum_int)
-
-        return e;
-    }
-
-    auto global_env = standard_env();
 }

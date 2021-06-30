@@ -1,55 +1,21 @@
 #include "exp.hpp"
+#include <string>
 
 namespace aperture::detail
 {
-    struct prim : exp
+    struct integer : exp
     {
-        template <typename T>
-        prim(T x) : x(new value<T>(x)) {}
+        int value;
 
-        unique_ptr<exp> clone() const
+        exp * clone() const
         {
-            return x->clone();
+            return new integer(value);
         }
 
-        struct interface
+        O & output(output_iterator<std::string> & o)
         {
-            virtual void print(int d) const = 0;
-            virtual prim * clone() const = 0;
-        };
-
-        template <typename T>
-        struct value final : interface
-        {
-            void print(int d) const override
-            {
-                indent(d);
-                std::cout << value << "\n";
-            }
-
-            interface * clone() const override
-            {
-                return new value<T>(x);
-            }
-
-            T x;
-        };
-
-        interface * x;
+            *o = value;
+            return ++o;
+        }
     };
-
-
-    template <typename X>
-    auto lift(prim * e)
-    {
-        auto result = dynamic_cast<value<T>*>(e->x);
-        return result ?
-            result : std::optional<X>();
-    }
-
-    template <typename X>
-    auto unlift(X x)
-    {
-        
-    }
 }

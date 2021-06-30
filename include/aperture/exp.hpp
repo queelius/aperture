@@ -142,4 +142,21 @@ namespace aperture
         return exp(details::cdr(e.e));
     }
 
+    auto sum_int(sexp * xs)
+    {
+            int res = 0;
+            for (auto i : args->value)
+                res += dynamic_cast<integer*>(i)->value;
+            return make_unique<integer>(res);
+    }
+
+    auto global_env()
+    {
+        auto e = new env();
+        e->values["+"] = make_unique<proc>(&sum_int)
+
+        return e;
+    }
+
+    auto global_env = standard_env();
 }
