@@ -437,11 +437,14 @@ namespace aperture
             if (is_self_evaluating(x))
                 return x;
 
+            /**
+             * application
+             */
             if (is_list(x))
             {
                 if (!is_list(cdr(x)))
                 {
-                    std::cerr << "[eval] expected list\n";
+                    std::cerr << "[eval] expected cdr to be a list\n";
                     std::terminate();
                 }
 
@@ -685,19 +688,16 @@ namespace aperture
     auto standard_env()
     {
         return env(details::standard_env());
-    } 
+    }
+
+    auto load(env e)
+    {
+        return false;
+    }
 }
 
 int main()
 {
-    auto global = aperture::standard_env();
-
-    std::string code = "((lambda (x y) (+ x y)) 1 2)";
-    auto x = aperture::exp(code.begin(),code.end());
-    auto res = aperture::eval(x,global);
-    std::cout << "result: " << aperture::details::value<aperture::details::integer>(res.e) << "\n";
-
-    /*
     using namespace aperture::details;        
 
     env * global_env = standard_env();
@@ -712,7 +712,6 @@ int main()
     std::cout << "\n\n==========================\n\n";
     exp * res3 = eval(res2,global_env);
     print(res3);
-    */
 
     //print(global_env->lookup("x"));
     /*
@@ -740,4 +739,15 @@ int main()
     //auto res = eval(xs,global_env);
     //print(res);
     */
+}
+
+int main2()
+{
+    auto global = aperture::standard_env();
+
+    std::string code = "((lambda (x y) (+ x y)) 1 2)";
+    auto x = aperture::exp(code.begin(),code.end());
+    auto res = aperture::eval(x,global);
+    std::cout << "result: " << aperture::details::value<aperture::details::integer>(res.e) << "\n";
+    return 0;
 }
