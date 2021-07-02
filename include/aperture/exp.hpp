@@ -71,31 +71,62 @@
 
 namespace aperture
 {
-    class exp
+    template <typename F>
+    auto make_proc(F f)
     {
-    public:
-        exp(detail::exp * e) : e(e) {}
+        return exp(new details::proc(f));
+    }
+
+    auto global_env = standard_env();
+
+    template <typename X, typename Y>
+    struct proc_fn
+    {
+        proc_fn(details::exp * p) : p(p) {}
+
+        auto operator()(X x)
+        {
+            return dynamic_cast<Y>(details::apply(p,x));
+        }
+
+        details::exp * p;
+    };
+
+    template <typename X, typename Y>
+    auto lift(details::exp * f)
+    {
+        return proc_fn<X,Y>(f);
+    }
+
+    struct env
+    {
+        env(details::env * e) : e(e) {};
+        env(env const & e) : e(dynamic_cast<details::env*>(e.e->clone())) {}
+
+        auto lookup(std::string const & s) { return e->lookup(s); }
+
+        details::env * e;
+    };
+
+    // if no free variables after
+    //     close(aperture*, free_symbols) 
+    // then return a lambda over the free symbols.
+    // otherwise, return an apeture.
+    struct exp
+    {
+        exp(details::exp * e) : e(e) {}
         exp(exp const & e) : e(e.e->clone()) {}
-        exp(json const & js) : e(make_unique<exp>(js)) {}
 
         template <typename I>
         exp(I begin, I end)
         {
-            auto [s,f] = detail::tokenize(begin,end);
-            e = detail::read(s,f);
+            auto [s,f] = details::tokenize(begin,end);
+            e = details::read(s,f);
         }
 
-        template <typename T>
-        auto as() const
-        {
-            return is_type<T>(e) ?
-                value<T>(e) : std::optional<T>();
-        }
+        auto eval(env const & x) { return exp(details::eval(e,x.e)); }
 
-        auto eval(env x) { return exp(details::eval(e,x)); }
-
-    private:
-        unique_ptr<detail::exp> e;
+        details::exp * e;
     };
 
     auto eval(exp e, env x)
@@ -105,13 +136,7 @@ namespace aperture
 
     auto make_symbol(std::string x)
     {
-        return exp(new details::symbol(std::move(x)));
-    }
-
-    template <typename F>
-    auto make_proc(F f)
-    {
-        return new details::proc(f);
+        return exp(new details::symbol(x));
     }
 
     /**
@@ -131,11 +156,10 @@ namespace aperture
      * When we eval an apply expression, we
      * substitute the terms in the rhs
      * with the lambda parameters, i.e.,
-     *
      */
     auto apply(exp lhs, exp rhs)
     {
-        return new details::apply(lhs,rhs);
+        return exp(details::apply(lhs.e,rhs.e));
     }
 
     auto cons(exp h, exp t)
@@ -153,21 +177,14 @@ namespace aperture
         return exp(details::cdr(e.e));
     }
 
-    auto sum_int(sexp * xs)
+    auto standard_env()
     {
-            int res = 0;
-            for (auto i : args->value)
-                res += dynamic_cast<integer*>(i)->value;
-            return make_unique<integer>(res);
+        return env(details::standard_env());
     }
 
-    auto global_env()
+    auto load(env e)
     {
-        auto e = new env();
-        e->values["+"] = make_unique<proc>(&sum_int)
-
-        return e;
+        return false;
     }
 
-    auto global_env = standard_env();
 }
