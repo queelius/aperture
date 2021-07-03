@@ -23,7 +23,14 @@ namespace aperture::details
     struct exp
     {
         virtual exp * clone() = 0;
+        virtual ~exp() = 0;
     };
+
+    template <typename T>
+    T * to(exp * e)
+    {
+        return dynamic_cast<T*>(e);
+    }
 
     struct empty_list : exp
     {
@@ -42,7 +49,7 @@ namespace aperture::details
 
     bool is_symbol(exp * e)
     {
-        return dynamic_cast<symbol*>(e) != nullptr;
+        return to<symbol>(e) != nullptr;
     }
 
     struct define : exp
@@ -50,7 +57,9 @@ namespace aperture::details
         std::string var;
         exp * value;
 
-        define(std::string var, exp * value) : var(var), value(value) {};
+        define(std::string var, exp * value) : var(var), value(value) {}
+
+        ~define() { delete value; }
 
         exp * clone() { return new define(var,value); }
     };
@@ -84,11 +93,12 @@ namespace aperture::details
         exp * lhs;
         exp * rhs;
 
+        ~exp() { delete lhs; delete rhs; }
         exp * clone() override { return new pair(lhs->clone(),rhs->clone()); }
     };
 
     template <typename T>
-    auto value(exp * x) { return dynamic_cast<T*>(x)->value; }
+    auto value(exp * x) { return to<T>(x)->value; }
 
     bool is_empty(exp * p)
     {
@@ -97,19 +107,19 @@ namespace aperture::details
 
     bool is_pair(exp * e)
     {
-        return dynamic_cast<pair*>(e) != nullptr;
+        return to<pair>(e) != nullptr;
     }
 
     bool is_list(exp * e)
     {
-        if (auto p = dynamic_cast<pair*>(e); p)
+        if (auto p = to<pair>(e); p)
             return is_list(p->rhs);
         return is_empty(e);
     }
 
     exp * cdr(exp * e)
     {
-        auto p = dynamic_cast<pair*>(e);
+        auto p = to<pair>(e);
         if (!p)
         {
             std::cerr << "[cdr] expected pair\n";
@@ -120,7 +130,7 @@ namespace aperture::details
 
     exp * car(exp * e)
     {
-        auto p = dynamic_cast<pair*>(e);
+        auto p = to<pair>(e);
         if (!p)
         {
             std::cerr << "[car] expected pair\n";
@@ -155,7 +165,7 @@ namespace aperture::details
 
     exp * append(exp * lhs, exp * rhs)
     {
-        dynamic_cast<pair*>(last(lhs))->rhs = rhs;
+        to<pair>(last(lhs))->rhs = rhs;
         return lhs;
     }
 
@@ -185,7 +195,7 @@ namespace aperture::details
             std::map<std::string, exp*> vs;
             for (auto const [k,e] : values)
                 vs[k] = e->clone();
-            return new env(vs,dynamic_cast<env*>(parent->clone()));
+            return new env(vs,to<env>(parent->clone()));
         }
 
         exp * lookup(std::string const & x)
@@ -214,7 +224,7 @@ namespace aperture::details
 
     bool is_env(exp * e)
     {
-        return dynamic_cast<env*>(e) != nullptr;
+        return to<env>(e) != nullptr;
     }
 
     env * extend(env * e, exp * params, exp * args)
@@ -251,40 +261,57 @@ namespace aperture::details
         env * e;
 
         lambda(exp * params, exp * body) :
-            params(params), body(body), e(nullptr) {}
+            params(params->clone()), body(body->clone()), e(nullptr) {}
+
+        ~lambda() { delete params; delete body; delete e; }
 
         exp * clone() override
         {
             auto copy = new lambda(params->clone(),body->clone());
             if (e != nullptr)
-                copy->e = dynamic_cast<env*>(e->clone());
+                copy->e = to<env>(e->clone());
             return copy;
         }
     };
 
+    exp * lambda_body(exp * l)
+    {
+        return to<lambda>(l)->body;
+    }
+
+    exp * lambda_params(exp * l)
+    {
+        return to<lambda>(l)->params;
+    }
+
+    exp * lambda_env(exp * l)
+    {
+        return to<lambda>(l)->env;
+    }
+
     bool is_define(exp * e)
     {
-        return dynamic_cast<define*>(e) != nullptr;
+        return to<define>(e) != nullptr;
     }
 
     bool is_lambda(exp * e)
     {
-        return dynamic_cast<lambda*>(e) != nullptr;
+        return to<lambda>(e) != nullptr;
     }
 
     bool is_integer(exp * e)
     {
-        return dynamic_cast<integer*>(e) != nullptr;
+        return to<integer>(e) != nullptr;
     }
 
     bool is_proc(exp * e)
     {
-        return dynamic_cast<proc*>(e) != nullptr;
+        return to<proc>(e) != nullptr;
     }
 
     bool is_str(exp * e)
     {
-        return dynamic_cast<str*>(e) != nullptr;
+        return to<str>(e) != nullptr;
     }
 
     bool is_self_evaluating(exp * e)
@@ -305,7 +332,7 @@ namespace aperture::details
 
         if (is_empty(ls))
             return new pair(x,NIL);
-        pair * t = dynamic_cast<pair*>(last(ls));
+        pair * t = to<pair>(last(ls));
         t->rhs = new pair(x,NIL);
         return ls;
     }
@@ -327,7 +354,7 @@ namespace aperture::details
 
         if (is_lambda(op))
         {
-            auto lam = dynamic_cast<lambda*>(op);
+            auto lam = to<lambda>(op);
             return eval(lam->body, extend(lam->e, lam->params, args));
         }
 
@@ -340,7 +367,7 @@ namespace aperture::details
     {
         if (is_pair(e))
         {
-            auto p = dynamic_cast<pair*>(e);
+            auto p = to<pair>(e);
             f.visit(e);
             walk(car(p),f);
             walk(cdr(p),f);
@@ -350,6 +377,25 @@ namespace aperture::details
             f.visit(e);
         }
     }
+
+    template <typename F>
+    bool pair_walk(exp * left, exp * right, F f)
+    {
+        if (is_pair(left))
+        {
+            if (!is_pair(right))
+                return false;
+
+            f.visit(left,right);
+            pair_walk(car(left),car(right),f);
+            pair_walk(cdr(left),cdr(right),f);
+        }
+        else
+        {
+            f.visit(left,right);
+        }
+    }
+
 
     exp * eval_list(exp * xs, env * e)
     {
@@ -412,13 +458,13 @@ namespace aperture::details
 
         if (is_define(x))
         {
-            e->values[dynamic_cast<define*>(x)->var] = value<define>(x);
+            e->values[to<define>(x)->var] = value<define>(x);
             return value<define>(x);
         }
 
         if (is_lambda(x))
         {
-            dynamic_cast<lambda*>(x)->e = e;
+            to<lambda>(x)->e = e;
             return x;
         }
 
@@ -520,7 +566,7 @@ namespace aperture::details
     /**
      * When you apply
      *
-     *     eval : (exp*,env) -> exp*
+     *     eval : (exp*,env*) -> exp*
      * 
      * and at least one symbol is undefined,
      * then the result is an aperture.
@@ -538,8 +584,9 @@ namespace aperture::details
      * 
      * When we evaulate an expression, even though an
      * aperture may be returned, the evaluation still proceeds
-     * as far as it can, performing as many of the defined
-     * substitutions as possible.
+     * whereever it can, so some branches of the evaluation may
+     * return apertures and others may return non-apetures, like
+     * integers or lambdas.
      * 
      * A free variable is a symbol, but the symbol can denote
      * any thing, like a procedure, integer, and so on.
@@ -562,27 +609,60 @@ namespace aperture::details
      * a special evaluator is an algebraic solver.
      */
 
-    /*
-    struct aperture : exp
+    exp * free(exp * e)
     {
-        exp * x;
-
-        exp * free()
-        {
-            return walk(x, [](exp * x) { return is_symbol(x); });
-        }
-    };
-
-    exp * close(exp * x, exp * symbols, exp * values)
-    {
-        if (is_empty(x->free()))
-        {
-            return make_lambda(x,e);
-        }
-        else
-        {
-            return make_aperture(x);
-        }
+        exp * es = NIL;
+        walk(e, [&es](exp * x) { if (is_symbol(x)) es = cons(x,es); });
+        return es;
     }
-    */
+
+    bool is_equal(exp * lhs, exp * rhs)
+    {
+        if (lhs == rhs)
+            return true;
+
+        return pair_walk(lhs,rhs,[](exp * l, exp * r)
+        {
+
+        });
+
+        if (is_pair(lhs) && is_pair(rhs))
+            return is_equal(car(lhs),car(rhs)) &&
+                   is_equal(cdr(lhs),cdr(rhs));
+        if (is_lambda(lhs) && is_lambda(rhs))
+            return is_equal(lambda_body(lhs),
+                   subst(lambda_body(rhs->clone()),
+                         lambda_params(rhs), lambda_params(lhs)));
+        if (is_integer(lhs) && is_integer(rhs))
+            return value<integer>(lhs) == value<integer>(rhs);
+        if (is_symbol(lhs) && is_symbol(rhs))
+            return value<symbol>(lhs) == value<symbol>(rhs);
+        if (is_env(lhs) && is_env(rhs))
+            return to<env>(lhs)->values == to<env>(rhs)->values &&
+                   is_equal(parent(lhs),parent(rhs));
+        if (is_str(lhs) && is_str(rhs))
+            return value<str>(lhs) == value<str>(rhs);
+
+        return false;
+    }
+
+    exp * subst(exp * x, exp * rep, exp * sub)
+    {
+        walk(x, [](exp * e)
+        {
+            auto r = rep;
+            auto s = sub;
+            while (!is_empty(r))
+            {
+                if (is_equal(car(r),e))
+                {
+                    e = car(s)->clone();
+                    break;
+                }
+                r = cdr(r);
+                s = cdr(s);
+            }
+        });
+    }
+
 }

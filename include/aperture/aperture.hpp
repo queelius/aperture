@@ -71,33 +71,6 @@
 
 namespace aperture
 {
-    template <typename F>
-    auto make_proc(F f)
-    {
-        return exp(new details::proc(f));
-    }
-
-    auto global_env = standard_env();
-
-    template <typename X, typename Y>
-    struct proc_fn
-    {
-        proc_fn(details::exp * p) : p(p) {}
-
-        auto operator()(X x)
-        {
-            return dynamic_cast<Y>(details::apply(p,x));
-        }
-
-        details::exp * p;
-    };
-
-    template <typename X, typename Y>
-    auto lift(details::exp * f)
-    {
-        return proc_fn<X,Y>(f);
-    }
-
     struct env
     {
         env(details::env * e) : e(e) {};
@@ -108,10 +81,14 @@ namespace aperture
         details::env * e;
     };
 
-    // if no free variables after
-    //     close(aperture*, free_symbols) 
-    // then return a lambda over the free symbols.
-    // otherwise, return an apeture.
+    /**
+     * Observe that
+     *     eval : (exp,env) -> exp.
+     * If the expression cannot be completely evaluated, say it
+     * has an ungrounded symbol, then eval returns an exp type
+     * with free variables. We call this kind of expression an
+     * aperture.
+     */
     struct exp
     {
         exp(details::exp * e) : e(e) {}
@@ -182,9 +159,37 @@ namespace aperture
         return env(details::standard_env());
     }
 
-    auto load(env e)
+    template <typename F>
+    auto make_proc(F f)
     {
-        return false;
+        return exp(new details::proc(f));
     }
 
+    auto global_env = standard_env();
+
+    template <typename X, typename Y>
+    struct proc_fn
+    {
+        proc_fn(details::exp * p) : p(p) {}
+
+        auto operator()(X x)
+        {
+            return dynamic_cast<Y>(details::apply(p,x));
+        }
+
+        details::exp * p;
+    };
+
+    template <typename X, typename Y>
+    auto lift(details::exp * f)
+    {
+        return proc_fn<X,Y>(f);
+    }
+
+    /*
+    exp close(exp x, exp vars)
+    {
+        //...
+    }
+    */
 }
