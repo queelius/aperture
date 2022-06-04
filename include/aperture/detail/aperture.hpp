@@ -23,6 +23,7 @@ namespace aperture::details
     struct exp
     {
         virtual exp * clone() = 0;
+        virtual bool is_equal(exp *) = 0;
         virtual ~exp() = 0;
     };
 
@@ -32,12 +33,20 @@ namespace aperture::details
         return dynamic_cast<T*>(e);
     }
 
-    struct empty_list : exp
+    template <typename T>
+    auto value(exp * x)
+    {
+        return to<T>(x) == nullptr ? nullptr : to<T>(x)->value;
+    }
+
+    // atom: NIL
+    struct nil : exp
     {
         exp * clone() override { return this; }
     };
-    exp * NIL = dynamic_cast<exp*>(new empty_list);
+    exp * NIL = new nil;
 
+    // atom: symbol
     struct symbol : exp
     {
         std::string value;
@@ -47,22 +56,15 @@ namespace aperture::details
         exp * clone() override { return new symbol(value); }
     };
 
+    bool is_nil(exp * e)
+    {
+        return e == NIL;
+    }
+
     bool is_symbol(exp * e)
     {
         return to<symbol>(e) != nullptr;
     }
-
-    struct define : exp
-    {
-        std::string var;
-        exp * value;
-
-        define(std::string var, exp * value) : var(var), value(value) {}
-
-        ~define() { delete value; }
-
-        exp * clone() { return new define(var,value); }
-    };
 
     struct integer : exp
     {
@@ -80,93 +82,117 @@ namespace aperture::details
         exp * clone() override { return new str(value); }
     };
 
+    exp * s(std::string x) { return new str(x); }
+
+    struct boolean : exp
+    {
+        bool value;
+        boolean(bool value) : value(value) {}
+        exp * clone() override { return new boolean(value); }
+    }
+    auto T = new boolean(true);
+    auto F = new boolean(false);
+
+    struct pair : exp
+    {
+        pair(exp * left, exp * right) : left(left), right(right) {}
+        exp * left;
+        exp * right;
+
+        ~exp() { delete left; delete right; }
+        exp * clone() override { return cons(left->clone(),right->clone()); }
+    };
+
     exp * atom(std::string const & tok)
     {
+        if (tok == "#t") return T;
+        if (tok == "#f") return F;
         if (auto res = try_cast<int>(tok); res)
             return new integer(*res);
         return new symbol(tok);
     }
 
-    struct pair : exp
-    {
-        pair(exp * lhs, exp * rhs) : lhs(lhs), rhs(rhs) {}
-        exp * lhs;
-        exp * rhs;
+    bool is_atom(exp * e) { return !is_pair(e); }
 
-        ~exp() { delete lhs; delete rhs; }
-        exp * clone() override { return new pair(lhs->clone(),rhs->clone()); }
-    };
+    bool is_boolean(exp * e) { return to<boolean>(e) != nullptr; }
+
+    bool is_list(exp * e) { return is_pair(e) ? is_list(cdr(p)) : is_nil(e); }
+
+    /**
+     * We do not use reduce for and/or so that we can enable
+     * short-circuiting.
+     */
+    exp * boolean_and(exp * xs)
+    {
+        if (is_nil(xs))         return T;
+        if (is_atom(xs))        return xs == T;
+        return car(xs) == F ?   F : boolean_and(cdr(xs));
+    }
+
+    exp * boolean_or(exp * xs)
+    {
+        if (is_nil(xs))     return F;
+        if (is_atom(xs))    return xs == T;
+        return car(xs) == T ? T : boolean_or(cdr(xs));
+    }
+
+    // F models a binary operator of type (exp*,exp*) -> exp*
+    template <typename F>
+    exp * reduce(exp * xs, exp * i, F f)
+    {
+        if (is_nil(xs)) return i;
+        if (is_atom(xs)) return xs;
+        if (is_pair(xs)) return f(car(xs),reduce(cdr(xs)));
+        return err(cons(lhs,rhs),"reduce: expected a pair or an atom");
+    }
 
     template <typename T>
-    auto value(exp * x) { return to<T>(x)->value; }
-
-    bool is_empty(exp * p)
+    exp * plus(exp * xs)
     {
-        return p == NIL;
+        return reduce(xs,new prim<T>(0),[](exp* l, exp* r)
+            { return new prim<T>(value<prim<T>>(l) + value<prim<T>>(r)); });
     }
 
-    bool is_pair(exp * e)
-    {
-        return to<pair>(e) != nullptr;
-    }
+    
 
-    bool is_list(exp * e)
+
+    /**
+     * errors are first-class citizens. when you eval an error, it terminates
+     * with error message.
+     */
+    exp * err(exp * e, exp * msg)
     {
-        if (auto p = to<pair>(e); p)
-            return is_list(p->rhs);
-        return is_empty(e);
+        return list(s("err"),e,msg);
     }
 
     exp * cdr(exp * e)
     {
-        auto p = to<pair>(e);
-        if (!p)
-        {
-            std::cerr << "[cdr] expected pair\n";
-            std::terminate();
-        }
-        return p->rhs;
+        return is_pair(e) ? to<pair>(e)->right : err(e,s("cdr expected pair"));
     }
 
     exp * car(exp * e)
     {
-        auto p = to<pair>(e);
-        if (!p)
-        {
-            std::cerr << "[car] expected pair\n";
-            std::terminate();
-        }
-        return p->lhs;
+        return is_pair(e) ? to<pair>(e)->left : err(e,s("car expected pair"));
     }
 
-    exp * cons(exp * lhs, exp * rhs)
+    exp * cons(exp * left, exp * right) { return new pair(left,right); }
+
+    exp * last_pair(exp * e)
     {
-        return new pair(lhs,rhs);
-    }
+        if (!is_pair(e))
+            return err(e,s("last_pair expected pair"));
 
-    exp * last(exp * ls)
-    {
-        if (!is_list(ls))
-        {
-            std::cerr << "[last] expected a list\n";
-            std::terminate();
-        }
-
-        if (is_empty(ls))
-        {
-            std::cerr << "[last] expected non-empty list\n";
-            std::terminate();
-        }
-
-        while (!is_empty(cdr(ls)))
-            ls = cdr(ls);
-        return ls;
+        while (is_pair(cdr(e))) e = cdr(e);
+        return e;
     }   
 
-    exp * append(exp * lhs, exp * rhs)
+    exp * append(exp * left, exp * right)
     {
-        to<pair>(last(lhs))->rhs = rhs;
-        return lhs;
+        if (!is_list(left))
+            return err(cons(left,right),s("append expected left to be a list"));
+        
+        to<pair>(last_pair(left))->right = right;
+        return left;
     }
 
     struct proc : exp
@@ -176,6 +202,8 @@ namespace aperture::details
         proc(proc_t value) : value(value) {}
 
         exp * clone() override { return new proc(value); }
+
+        exp * apply(exp * args) { return value(args); }
 
         proc_t value;
     };
@@ -203,13 +231,8 @@ namespace aperture::details
             if (values.count(x) != 0)
                 return values.at(x);
 
-            if (parent == nullptr)
-            {
-                std::cerr << "[lookup] undefined symbol: " << x << "\n";
-                std::terminate();
-            }
-
-            return parent->lookup(x);
+            return parent == nullptr ?
+                error(new symbol(x), s("lookup undefined symbol")) : parent->lookup(x);
         }
 
         env * find(std::string const & x)
@@ -221,6 +244,19 @@ namespace aperture::details
                 nullptr : parent->find(x);
         }
     };
+
+        // (cons 'env ( cons parent ( env_list )))
+        // (cons env ( cons parent env_list ))
+        // where
+        //     PARENT (pair*) denotes the parent environent
+        // and
+        //     ENV_LIST denotes a list of pairs
+        //         ( (str* . exp*), ..., (str* . exp*) )
+        //     that describes the top-level environment.
+        //
+        // when we eval(environment), we get an env* primitive. at this point,
+        // it is treated as an atomic object that may be queried and is
+        // implemented for efficiency. we could 
 
     bool is_env(exp * e)
     {
@@ -254,50 +290,38 @@ namespace aperture::details
         return closure;
     }
 
+    exp * eval(exp *, env *);
+
     struct lambda : exp
     {
         exp * params;
         exp * body;
         env * e;
 
-        lambda(exp * params, exp * body) :
-            params(params->clone()), body(body->clone()), e(nullptr) {}
+        bool is_equal(exp * rhs) override
+        {
+            auto l = to<lambda>(rhs);
+            return l != nullptr &&
+                   params->is_equal(l->params) &&
+                   body->is_equal(l->body) &&
+                   e->is_equal(l->e);
+        }
+
+        lambda(exp * params, exp * body, env * e) :
+            params(params, body, e(e) {}
 
         ~lambda() { delete params; delete body; delete e; }
 
+        exp * apply(exp * args)
+        {
+            return eval(body, extend(e, params, args));
+        }
+
         exp * clone() override
         {
-            auto copy = new lambda(params->clone(),body->clone());
-            if (e != nullptr)
-                copy->e = to<env>(e->clone());
-            return copy;
+            new lambda(params->clone(),body->clone(),to<env>(e->clone()));
         }
     };
-
-    exp * lambda_body(exp * l)
-    {
-        return to<lambda>(l)->body;
-    }
-
-    exp * lambda_params(exp * l)
-    {
-        return to<lambda>(l)->params;
-    }
-
-    exp * lambda_env(exp * l)
-    {
-        return to<lambda>(l)->env;
-    }
-
-    bool is_define(exp * e)
-    {
-        return to<define>(e) != nullptr;
-    }
-
-    bool is_lambda(exp * e)
-    {
-        return to<lambda>(e) != nullptr;
-    }
 
     bool is_integer(exp * e)
     {
@@ -306,7 +330,7 @@ namespace aperture::details
 
     bool is_proc(exp * e)
     {
-        return to<proc>(e) != nullptr;
+        return to<proc>(e) != nullptr || to<lambda>(e) != nullptr;
     }
 
     bool is_str(exp * e)
@@ -319,47 +343,19 @@ namespace aperture::details
         return is_proc(e) ||
             is_integer(e) ||
             is_str(e) ||
-            is_empty(e);
+            is_nil(e) ||
+            is_boolean(e);
     }
-
-    exp * push_back(exp * ls, exp * x)
-    {
-        if (!is_list(ls))
-        {
-            std::cerr << "[last] expected a list\n";
-            std::terminate();
-        }
-
-        if (is_empty(ls))
-            return new pair(x,NIL);
-        pair * t = to<pair>(last(ls));
-        t->rhs = new pair(x,NIL);
-        return ls;
-    }
-
-    exp * eval(exp *, env *);
 
     exp * apply(exp * op, exp * args)
     {
-        if (!is_list(args))
-        {
-            std::cerr << "[apply] expected argument list\n";
-            std::terminate();
-        }
+        if (!is_pair(args))
+            return err(args,"apply expected args to be a pair");
 
         if (is_proc(op))
-        {
-            return value<proc>(op)(args);
-        }
+            return value<proc>(op)->apply(args);
 
-        if (is_lambda(op))
-        {
-            auto lam = to<lambda>(op);
-            return eval(lam->body, extend(lam->e, lam->params, args));
-        }
-
-        std::cerr << "[apply] expected proc\n";
-        std::terminate();
+        return err(op, s("apply expected proc");
     }
 
     template <typename F>
@@ -396,126 +392,57 @@ namespace aperture::details
         }
     }
 
-
-    exp * eval_list(exp * xs, env * e)
+    exp * eval_pair(exp * xs, env * e)
     {
-        exp * rs = NIL;
-        while (!is_empty(xs))
-        {
-            exp * res = eval(car(xs),e);
-            rs = push_back(rs,res);
-            xs = cdr(xs);
-        }
-        return rs;
+        return is_pair(xs) ?
+            cons(eval(car(xs),e),eval_pair(cdr(xs),e)) : eval(xs,e);
     }
 
-    exp * make_str(exp * x)
+    exp * make_list(exp* ... args)
     {
-        // (str "test")
-        return nullptr;
+        va_list es;
+        va_start(es, args);
+
+        va_arg(es,exp*);
+
+        va_end(es);
     }
 
-    exp * make_define(exp * x)
+    exp * make_define(symbol * x, exp * value, env * e)
     {
-        if (!is_list(x))
-        {
-            std::cerr << "[make_define] expected list\n";
-            std::terminate();
-        }
-
-        return new define(value<symbol>(car(x)),car(cdr(x)));
-    }
-
-    exp * make_lambda(exp * x)
-    {
-        if (!is_list(x))
-        {
-            std::cerr << "[make_lambda] expected list\n";
-            std::terminate();
-        }
-
-        // parameter list
-        if (!is_list(car(x)))
-        {
-            std::cerr << "[make_lambda] expected parameter list\n";
-            std::terminate();
-        }
-
-        // body
-        if (is_empty(cdr(x)))
-        {
-            std::cerr << "[make_lambda] expected non-empty body\n";
-            std::terminate();
-        }
-
-        return new lambda(car(x),car(cdr(x)));
+        e->values[x->value] = value;
+        return value;
     }
 
     exp * eval(exp * x, env * e)
     {
+        if (is_self_evaluating(x))
+            return x;
+
         if (is_symbol(x))
             return eval(e->lookup(value<symbol>(x)),e);
 
-        if (is_define(x))
-        {
-            e->values[to<define>(x)->var] = value<define>(x);
-            return value<define>(x);
-        }
+        // must be a pair past this point
+        if (is_symbol(car(l)) && value<symbol>(car(l)) == "define")
+            return make_define(car(cdr(l)), cdr(cdr(l)), e);
 
-        if (is_lambda(x))
-        {
-            to<lambda>(x)->e = e;
-            return x;
-        }
-
-        if (is_self_evaluating(x))
-            return x;
+        if (is_symbol(car(l)) && value<symbol>(car(l)) == "lambda")
+            return make_lambda(car(cdr(l)), car(cdr(cdr(l))),e);
 
         /**
          * application
          */
-        if (is_list(x))
-            return eval(apply(eval(eval(car(x),e),e),eval_list(cdr(x),e)),e);
+        if (is_pair(x))
+            return apply(eval(car(x),e),eval_pair(cdr(x),e));
 
-        std::cerr << "[eval] expected self-evaluating expression, symbol, or list\n";
-        std::terminate();
+        return err(x, s("expected self-evaluating expression, symbol, or pair"));
     }
 
     env * standard_env()
     {
         env * e = new env;
-        e->values["+"] = new proc([](exp * e) -> exp*
-        {
-            if (!is_list(e))
-            {
-                std::cerr << "[proc:+] expected a list\n";
-                std::terminate();
-            }
-            int res = 0;
-            while (!is_empty(e))
-            {
-                res += value<integer>(car(e));
-                e = cdr(e);
-            }
-            return new integer(res);
-        });
-
-        e->values["*"] = new proc([](exp * e) -> exp*
-        {
-            if (!is_list(e))
-            {
-                std::cerr << "[proc:*] expected a list\n";
-                std::terminate();
-            }
-
-            int res = 1;
-            while (!is_empty(e))
-            {
-                res *= value<integer>(car(e));
-                e = cdr(e);
-            }
-            return new integer(res);
-        });
+        e->values["+"] = new proc(&plus<number>);
+        e->values["*"] = new proc(&prod<number>);
         return e;
     }
 
@@ -524,10 +451,7 @@ namespace aperture::details
     exp * read(I & begin, I end)
     {
         if (begin == end)
-        {
-            std::cerr << "[read] unexpected EOF\n";
-            std::terminate();
-        }
+            return err(nullptr, s("read encountered unexpected EOF"));
 
         auto tok = *begin;
         ++begin;
@@ -537,21 +461,11 @@ namespace aperture::details
             while (begin->str() != ")")
                 l = push_back(l,read(begin,end));
             ++begin;
-
-            if (is_symbol(car(l)) && value<symbol>(car(l)) == "define")
-                return make_define(cdr(l));
-
-            if (is_symbol(car(l)) && value<symbol>(car(l)) == "lambda")
-                return make_lambda(cdr(l));
-            
             return l;
         }
         
         if (tok.str() == ")")
-        {
-            std::cerr << "[read] unexpected closing paren\n";
-            std::terminate();
-        }
+            return err(nullptr, s("read encountered unexpected ')'"));
 
         return atom(tok.str());
     }
@@ -623,7 +537,7 @@ namespace aperture::details
 
         return pair_walk(lhs,rhs,[](exp * l, exp * r)
         {
-
+            
         });
 
         if (is_pair(lhs) && is_pair(rhs))

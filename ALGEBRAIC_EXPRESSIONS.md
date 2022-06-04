@@ -1,6 +1,12 @@
 # Algebraic expressions
 
 When we evaluate an expression the result is another expression.
+This expression should be self-evaluating, e.g., `(eval (number 1))` evaluates
+to the expression `(number 1)`.
+
+There are many expressions that are self-evaluating: numbers, Booleans,
+closures, and so on.
+We seek one additional self-evaluating expression.
 
 Since these expressions represent values, they may be combined and
 operated on, in both the host language and in the hosted language.
