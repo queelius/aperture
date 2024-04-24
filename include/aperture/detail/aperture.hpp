@@ -11,7 +11,7 @@
 
 namespace aperture::details
 {
-    template <typename T>
+    template <typename T, >
     auto try_cast(std::string const & s)
     {
         std::stringstream ss(s);
