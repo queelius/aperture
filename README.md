@@ -178,6 +178,3 @@ Language models, in particular Large Language Models (LLMs), provide a new kind 
 
 If there is a hole in an expression, the context itself may be enough to close the hole.
 
-#### Example
-
-...
