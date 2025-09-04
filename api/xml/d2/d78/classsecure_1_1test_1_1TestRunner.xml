@@ -1,0 +1,256 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d2/d78/classsecure_1_1test_1_1TestRunner" kind="class" language="C++" prot="public">
+    <compoundname>secure::test::TestRunner</compoundname>
+    <includes refid="df/d34/test__framework_8hpp" local="no">test_framework.hpp</includes>
+    <innerclass refid="df/dec/structsecure_1_1test_1_1TestRunner_1_1TestCase" prot="public">secure::test::TestRunner::TestCase</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d2/d78/classsecure_1_1test_1_1TestRunner_1a509199775a3985a9f6b254887c8dc7c3" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int secure::test::TestRunner::failed</definition>
+        <argsstring></argsstring>
+        <name>failed</name>
+        <qualifiedname>secure::test::TestRunner::failed</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/test_framework.hpp" line="24" column="9" bodyfile="/home/runner/work/aperture/aperture/test_framework.hpp" bodystart="24" bodyend="-1"/>
+        <referencedby refid="d2/d78/classsecure_1_1test_1_1TestRunner_1aca5967a5a652ac11283b0844c1a8354d" compoundref="df/d34/test__framework_8hpp" startline="124" endline="124">all_passed</referencedby>
+        <referencedby refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a94e4116c281cf6841d6296f65ffdbf4b" compoundref="df/d34/test__framework_8hpp" startline="97" endline="122">run_all</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d78/classsecure_1_1test_1_1TestRunner_1aca6a45885eb6bc7a9097278ef4d4dca0" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int secure::test::TestRunner::passed</definition>
+        <argsstring></argsstring>
+        <name>passed</name>
+        <qualifiedname>secure::test::TestRunner::passed</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/test_framework.hpp" line="23" column="9" bodyfile="/home/runner/work/aperture/aperture/test_framework.hpp" bodystart="23" bodyend="-1"/>
+        <referencedby refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a94e4116c281cf6841d6296f65ffdbf4b" compoundref="df/d34/test__framework_8hpp" startline="97" endline="122">run_all</referencedby>
+        <referencedby refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a4e679cb16b833a442dbca329562002db" compoundref="df/d34/test__framework_8hpp" startline="39" endline="95">run_test</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d78/classsecure_1_1test_1_1TestRunner_1a02240737f4c319cbc16010f920ba725c" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="df/dec/structsecure_1_1test_1_1TestRunner_1_1TestCase" kindref="compound">TestCase</ref> &gt;</type>
+        <definition>std::vector&lt;TestCase&gt; secure::test::TestRunner::tests</definition>
+        <argsstring></argsstring>
+        <name>tests</name>
+        <qualifiedname>secure::test::TestRunner::tests</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/test_framework.hpp" line="22" column="17" bodyfile="/home/runner/work/aperture/aperture/test_framework.hpp" bodystart="22" bodyend="-1"/>
+        <referencedby refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a3df19389350fa97007b18dc01dcf598c" compoundref="df/d34/test__framework_8hpp" startline="35" endline="37">add_error_test</referencedby>
+        <referencedby refid="d2/d78/classsecure_1_1test_1_1TestRunner_1abcd5f998f5f2f77967b388d82e7037b6" compoundref="df/d34/test__framework_8hpp" startline="30" endline="33">add_test</referencedby>
+        <referencedby refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a94e4116c281cf6841d6296f65ffdbf4b" compoundref="df/d34/test__framework_8hpp" startline="97" endline="122">run_all</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d78/classsecure_1_1test_1_1TestRunner_1aa96e255ccf9c68e0f7e9217f48ffa41c" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool secure::test::TestRunner::verbose</definition>
+        <argsstring></argsstring>
+        <name>verbose</name>
+        <qualifiedname>secure::test::TestRunner::verbose</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/test_framework.hpp" line="25" column="10" bodyfile="/home/runner/work/aperture/aperture/test_framework.hpp" bodystart="25" bodyend="-1"/>
+        <referencedby refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a94e4116c281cf6841d6296f65ffdbf4b" compoundref="df/d34/test__framework_8hpp" startline="97" endline="122">run_all</referencedby>
+        <referencedby refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a4e679cb16b833a442dbca329562002db" compoundref="df/d34/test__framework_8hpp" startline="39" endline="95">run_test</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d2/d78/classsecure_1_1test_1_1TestRunner_1ae5869e19fdd97c46dd1455843ff50a20" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>secure::test::TestRunner::TestRunner</definition>
+        <argsstring>(bool verbose=false)</argsstring>
+        <name>TestRunner</name>
+        <qualifiedname>secure::test::TestRunner::TestRunner</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>verbose</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/test_framework.hpp" line="28" column="5" bodyfile="/home/runner/work/aperture/aperture/test_framework.hpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d78/classsecure_1_1test_1_1TestRunner_1a3df19389350fa97007b18dc01dcf598c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void secure::test::TestRunner::add_error_test</definition>
+        <argsstring>(const std::string &amp;name, const std::string &amp;aperture_code)</argsstring>
+        <name>add_error_test</name>
+        <qualifiedname>secure::test::TestRunner::add_error_test</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>aperture_code</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/test_framework.hpp" line="35" column="10" bodyfile="/home/runner/work/aperture/aperture/test_framework.hpp" bodystart="35" bodyend="37"/>
+        <references refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a02240737f4c319cbc16010f920ba725c" compoundref="df/d34/test__framework_8hpp" startline="22">tests</references>
+      </memberdef>
+      <memberdef kind="function" id="d2/d78/classsecure_1_1test_1_1TestRunner_1abcd5f998f5f2f77967b388d82e7037b6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void secure::test::TestRunner::add_test</definition>
+        <argsstring>(const std::string &amp;name, const std::string &amp;aperture_code, double expected, double tolerance=1e-9)</argsstring>
+        <name>add_test</name>
+        <qualifiedname>secure::test::TestRunner::add_test</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>aperture_code</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>expected</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>tolerance</declname>
+          <defval>1e-9</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/test_framework.hpp" line="30" column="10" bodyfile="/home/runner/work/aperture/aperture/test_framework.hpp" bodystart="30" bodyend="33"/>
+        <references refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a02240737f4c319cbc16010f920ba725c" compoundref="df/d34/test__framework_8hpp" startline="22">tests</references>
+      </memberdef>
+      <memberdef kind="function" id="d2/d78/classsecure_1_1test_1_1TestRunner_1aca5967a5a652ac11283b0844c1a8354d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool secure::test::TestRunner::all_passed</definition>
+        <argsstring>() const</argsstring>
+        <name>all_passed</name>
+        <qualifiedname>secure::test::TestRunner::all_passed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/test_framework.hpp" line="124" column="10" bodyfile="/home/runner/work/aperture/aperture/test_framework.hpp" bodystart="124" bodyend="124"/>
+        <references refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a509199775a3985a9f6b254887c8dc7c3" compoundref="df/d34/test__framework_8hpp" startline="24">failed</references>
+      </memberdef>
+      <memberdef kind="function" id="d2/d78/classsecure_1_1test_1_1TestRunner_1a94e4116c281cf6841d6296f65ffdbf4b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void secure::test::TestRunner::run_all</definition>
+        <argsstring>()</argsstring>
+        <name>run_all</name>
+        <qualifiedname>secure::test::TestRunner::run_all</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/test_framework.hpp" line="97" column="10" bodyfile="/home/runner/work/aperture/aperture/test_framework.hpp" bodystart="97" bodyend="122"/>
+        <references refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a509199775a3985a9f6b254887c8dc7c3" compoundref="df/d34/test__framework_8hpp" startline="24">failed</references>
+        <references refid="d2/d78/classsecure_1_1test_1_1TestRunner_1aca6a45885eb6bc7a9097278ef4d4dca0" compoundref="df/d34/test__framework_8hpp" startline="23">passed</references>
+        <references refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a4e679cb16b833a442dbca329562002db" compoundref="df/d34/test__framework_8hpp" startline="39" endline="95">run_test</references>
+        <references refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a02240737f4c319cbc16010f920ba725c" compoundref="df/d34/test__framework_8hpp" startline="22">tests</references>
+        <references refid="d2/d78/classsecure_1_1test_1_1TestRunner_1aa96e255ccf9c68e0f7e9217f48ffa41c" compoundref="df/d34/test__framework_8hpp" startline="25">verbose</references>
+      </memberdef>
+      <memberdef kind="function" id="d2/d78/classsecure_1_1test_1_1TestRunner_1a4e679cb16b833a442dbca329562002db" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool secure::test::TestRunner::run_test</definition>
+        <argsstring>(const TestCase &amp;test)</argsstring>
+        <name>run_test</name>
+        <qualifiedname>secure::test::TestRunner::run_test</qualifiedname>
+        <param>
+          <type>const <ref refid="df/dec/structsecure_1_1test_1_1TestRunner_1_1TestCase" kindref="compound">TestCase</ref> &amp;</type>
+          <declname>test</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/test_framework.hpp" line="39" column="10" bodyfile="/home/runner/work/aperture/aperture/test_framework.hpp" bodystart="39" bodyend="95"/>
+        <references refid="df/dec/structsecure_1_1test_1_1TestRunner_1_1TestCase_1a31453205c53955bb6a1a2966bbd05714" compoundref="df/d34/test__framework_8hpp" startline="15">secure::test::TestRunner::TestCase::aperture_code</references>
+        <references refid="df/dec/structsecure_1_1test_1_1TestRunner_1_1TestCase_1a198a0c4f24355d40fd70a6611eac17f4" compoundref="df/d34/test__framework_8hpp" startline="16">secure::test::TestRunner::TestCase::expected_result</references>
+        <references refid="df/dec/structsecure_1_1test_1_1TestRunner_1_1TestCase_1a3e8aff6831655b11f8272da00f03a798" compoundref="df/d34/test__framework_8hpp" startline="14">secure::test::TestRunner::TestCase::name</references>
+        <references refid="d2/d78/classsecure_1_1test_1_1TestRunner_1aca6a45885eb6bc7a9097278ef4d4dca0" compoundref="df/d34/test__framework_8hpp" startline="23">passed</references>
+        <references refid="df/dec/structsecure_1_1test_1_1TestRunner_1_1TestCase_1af47905810e5d681c6186f4f65d92c218" compoundref="df/d34/test__framework_8hpp" startline="17">secure::test::TestRunner::TestCase::should_error</references>
+        <references refid="df/dec/structsecure_1_1test_1_1TestRunner_1_1TestCase_1a03fc216ad07b5b2e3463133dca82126f" compoundref="df/d34/test__framework_8hpp" startline="18">secure::test::TestRunner::TestCase::tolerance</references>
+        <references refid="d2/d78/classsecure_1_1test_1_1TestRunner_1aa96e255ccf9c68e0f7e9217f48ffa41c" compoundref="df/d34/test__framework_8hpp" startline="25">verbose</references>
+        <referencedby refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a94e4116c281cf6841d6296f65ffdbf4b" compoundref="df/d34/test__framework_8hpp" startline="97" endline="122">run_all</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4">
+        <label>bool</label>
+      </node>
+      <node id="3">
+        <label>int</label>
+      </node>
+      <node id="1">
+        <label>secure::test::TestRunner</label>
+        <link refid="d2/d78/classsecure_1_1test_1_1TestRunner"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>tests</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>failed</edgelabel>
+          <edgelabel>passed</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>verbose</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>vector&lt; secure::test::TestRunner::TestCase &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/aperture/aperture/test_framework.hpp" line="11" column="1" bodyfile="/home/runner/work/aperture/aperture/test_framework.hpp" bodystart="11" bodyend="125"/>
+    <listofallmembers>
+      <member refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a3df19389350fa97007b18dc01dcf598c" prot="public" virt="non-virtual"><scope>secure::test::TestRunner</scope><name>add_error_test</name></member>
+      <member refid="d2/d78/classsecure_1_1test_1_1TestRunner_1abcd5f998f5f2f77967b388d82e7037b6" prot="public" virt="non-virtual"><scope>secure::test::TestRunner</scope><name>add_test</name></member>
+      <member refid="d2/d78/classsecure_1_1test_1_1TestRunner_1aca5967a5a652ac11283b0844c1a8354d" prot="public" virt="non-virtual"><scope>secure::test::TestRunner</scope><name>all_passed</name></member>
+      <member refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a509199775a3985a9f6b254887c8dc7c3" prot="private" virt="non-virtual"><scope>secure::test::TestRunner</scope><name>failed</name></member>
+      <member refid="d2/d78/classsecure_1_1test_1_1TestRunner_1aca6a45885eb6bc7a9097278ef4d4dca0" prot="private" virt="non-virtual"><scope>secure::test::TestRunner</scope><name>passed</name></member>
+      <member refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a94e4116c281cf6841d6296f65ffdbf4b" prot="public" virt="non-virtual"><scope>secure::test::TestRunner</scope><name>run_all</name></member>
+      <member refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a4e679cb16b833a442dbca329562002db" prot="public" virt="non-virtual"><scope>secure::test::TestRunner</scope><name>run_test</name></member>
+      <member refid="d2/d78/classsecure_1_1test_1_1TestRunner_1ae5869e19fdd97c46dd1455843ff50a20" prot="public" virt="non-virtual"><scope>secure::test::TestRunner</scope><name>TestRunner</name></member>
+      <member refid="d2/d78/classsecure_1_1test_1_1TestRunner_1a02240737f4c319cbc16010f920ba725c" prot="private" virt="non-virtual"><scope>secure::test::TestRunner</scope><name>tests</name></member>
+      <member refid="d2/d78/classsecure_1_1test_1_1TestRunner_1aa96e255ccf9c68e0f7e9217f48ffa41c" prot="private" virt="non-virtual"><scope>secure::test::TestRunner</scope><name>verbose</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

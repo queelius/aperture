@@ -1,0 +1,9 @@
+<map id="secure::test::TestRunner" name="secure::test::TestRunner">
+<area shape="rect" id="Node000001" title=" " alt="" coords="142,123,321,148"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,188,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="132,52,219,120,215,125,129,56"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="212,13,251,38"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="234,52,234,122,229,122,229,52"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="283,13,334,38"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="305,53,295,77,281,100,253,125,250,121,277,97,291,74,300,51"/>
+</map>

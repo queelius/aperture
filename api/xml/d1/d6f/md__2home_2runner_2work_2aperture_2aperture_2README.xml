@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README" kind="page">
+    <compoundname>md__2home_2runner_2work_2aperture_2aperture_2README</compoundname>
+    <title>Secure Aperture Language</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><anchor id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README_1autotoc_md44"/> A security-focused programming language that uses &quot;apertures&quot; (holes) to enable secure distributed computation. This allows untrusted servers to optimize and partially evaluate computations without accessing sensitive data.</para>
+<sect1 id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README_1autotoc_md45">
+<title>Theoretical Foundation</title>
+<para>When mathematicians encounter symbols in papers, their mental model provides the binding—the *closure*—for these symbols, grounding them with meaning. Without this binding, symbols remain free variables, and the expression lacks unambiguous meaning.</para>
+<para>Apertures formalize this ambiguity: they are &quot;openings, holes, or gaps&quot; in a program&apos;s specification that can be filled later. Unlike traditional systems that fail on undefined variables, apertures make partial specifications first-class citizens.</para>
+</sect1>
+<sect1 id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README_1autotoc_md46">
+<title>Core Concept</title>
+<para>The key innovation is treating incomplete program specifications as first-class values. When an expression contains &quot;holes&quot; (marked with <computeroutput>?variable</computeroutput>), evaluation proceeds as far as possible, algebraically simplifying the expression while preserving the holes for sensitive data. This enables a new paradigm: <computeroutput>eval(aperture E) = aperture E</computeroutput>, where apertures are values that represent incomplete computations.</para>
+</sect1>
+<sect1 id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README_1autotoc_md47">
+<title>Architecture</title>
+<para><programlisting><codeline><highlight class="normal">┌─────────────────┐<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>┌──────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>Trusted<sp/>Client<sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/>Untrusted<sp/>Server<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">├─────────────────┤<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>├──────────────────┤</highlight></codeline>
+<codeline><highlight class="normal">│<sp/>•<sp/>Private<sp/>data<sp/><sp/>│────────&gt;│<sp/>•<sp/>Partial<sp/>eval<sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/>•<sp/>Fill<sp/>holes<sp/><sp/><sp/><sp/>│<sp/>Formula<sp/>│<sp/>•<sp/>Optimization<sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/>•<sp/>Final<sp/>eval<sp/><sp/><sp/><sp/>│&lt;────────│<sp/>•<sp/>No<sp/>access<sp/>to<sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│Optimized│<sp/><sp/><sp/>private<sp/>data<sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────┘<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└──────────────────┘</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README_1autotoc_md48">
+<title>Language Features</title>
+<sect2 id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README_1autotoc_md49">
+<title>Value Types</title>
+<para><itemizedlist>
+<listitem><para><bold>Nil</bold>: Empty value</para>
+</listitem><listitem><para><bold>Numbers</bold>: Double-precision floating point</para>
+</listitem><listitem><para><bold>Symbols</bold>: Variable names and operators</para>
+</listitem><listitem><para><bold>Strings</bold>: Text literals</para>
+</listitem><listitem><para><bold>Lists</bold>: S-expressions <computeroutput>(op arg1 arg2 ...)</computeroutput></para>
+</listitem><listitem><para><bold>Lambdas</bold>: Functions with closures</para>
+</listitem><listitem><para><bold>Holes</bold>: Placeholders for private data <computeroutput>?variable</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+<sect2 id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README_1autotoc_md50">
+<title>Core Operations</title>
+<para><itemizedlist>
+<listitem><para>Arithmetic: <computeroutput>+</computeroutput>, <computeroutput>-</computeroutput>, <computeroutput>*</computeroutput>, <computeroutput>/</computeroutput></para>
+</listitem><listitem><para>Conditionals: <computeroutput>if</computeroutput></para>
+</listitem><listitem><para>Bindings: <computeroutput>let</computeroutput>, <computeroutput>lambda</computeroutput></para>
+</listitem><listitem><para>Partial evaluation with algebraic simplification</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+</sect1>
+<sect1 id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README_1autotoc_md51">
+<title>Security Properties</title>
+<para><orderedlist>
+<listitem><para><bold>Data Privacy</bold>: Sensitive values never leave the trusted environment</para>
+</listitem><listitem><para><bold>Computation Integrity</bold>: Clients can verify the structure of returned expressions</para>
+</listitem><listitem><para><bold>Partial Evaluation</bold>: Untrusted nodes can optimize without seeing private data</para>
+</listitem><listitem><para><bold>Hole Tracking</bold>: System tracks which variables remain unfilled</para>
+</listitem><listitem><para><bold>Algebraic Simplification</bold>: Expressions reduce to normal form while preserving holes</para>
+</listitem></orderedlist>
+</para>
+</sect1>
+<sect1 id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README_1autotoc_md52">
+<title>Example: Tax Calculation</title>
+<para><programlisting filename=".lisp"><codeline><highlight class="normal">;;<sp/>Public<sp/>formula<sp/>with<sp/>private<sp/>income</highlight></codeline>
+<codeline><highlight class="normal">(let<sp/>((rate<sp/>0.25)<sp/>(deductions<sp/>5000))</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>(-<sp/>(*<sp/>?income<sp/>rate)<sp/>deductions))</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">;;<sp/>After<sp/>server<sp/>optimization:</highlight></codeline>
+<codeline><highlight class="normal">(-<sp/>(*<sp/>?income<sp/>0.25)<sp/>5000)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">;;<sp/>Client<sp/>fills<sp/>locally:</highlight></codeline>
+<codeline><highlight class="normal">;;<sp/>income<sp/>=<sp/>100000<sp/>→<sp/>Result:<sp/>20000</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README_1autotoc_md53">
+<title>Advanced Example: Symbolic Computation</title>
+<para><programlisting filename=".lisp"><codeline><highlight class="normal">;;<sp/>Expression<sp/>with<sp/>free<sp/>variable<sp/>y</highlight></codeline>
+<codeline><highlight class="normal">(lambda<sp/>x<sp/>(*<sp/>(+<sp/>x<sp/>?y)<sp/>(+<sp/>x<sp/>?y)))</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">;;<sp/>Applied<sp/>with<sp/>x=1,<sp/>keeping<sp/>y<sp/>as<sp/>hole:</highlight></codeline>
+<codeline><highlight class="normal">(*<sp/>(+<sp/>1<sp/>?y)<sp/>(+<sp/>1<sp/>?y))</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">;;<sp/>Could<sp/>be<sp/>algebraically<sp/>expanded<sp/>to:</highlight></codeline>
+<codeline><highlight class="normal">(+<sp/>1<sp/>(*<sp/>2<sp/>?y)<sp/>(*<sp/>?y<sp/>?y))</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">;;<sp/>Or<sp/>solved<sp/>symbolically<sp/>for<sp/>specific<sp/>values</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README_1autotoc_md54">
+<title>Implementation</title>
+<sect2 id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README_1autotoc_md55">
+<title>Modern C++23 Design</title>
+<para><itemizedlist>
+<listitem><para><computeroutput>std::expected</computeroutput> for error handling</para>
+</listitem><listitem><para><computeroutput>std::variant</computeroutput> for type-safe value representation</para>
+</listitem><listitem><para><computeroutput>std::shared_ptr</computeroutput> for automatic memory management</para>
+</listitem><listitem><para>Zero-copy string views for parsing</para>
+</listitem><listitem><para>Stack-based evaluation for efficiency</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+<sect2 id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README_1autotoc_md56">
+<title>Performance</title>
+<para><itemizedlist>
+<listitem><para>~0.6 microseconds per evaluation (simple expressions)</para>
+</listitem><listitem><para>~0.9 microseconds for partial evaluation with holes</para>
+</listitem><listitem><para>Memory-safe with bounds checking</para>
+</listitem><listitem><para>DoS protection via complexity limits</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+</sect1>
+<sect1 id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README_1autotoc_md57">
+<title>Building</title>
+<para><programlisting filename=".bash"><codeline><highlight class="normal">#<sp/>Requires<sp/>C++23<sp/>compiler<sp/>(GCC<sp/>13+<sp/>or<sp/>Clang<sp/>16+)</highlight></codeline>
+<codeline><highlight class="normal">g++<sp/>-std=c++23<sp/>-O2<sp/>aperture.cpp<sp/>demo.cpp<sp/>-o<sp/>demo</highlight></codeline>
+<codeline><highlight class="normal">./demo</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README_1autotoc_md58">
+<title>Use Cases</title>
+<para><orderedlist>
+<listitem><para><bold>Cloud Computing</bold>: Process datasets with sensitive columns</para>
+</listitem><listitem><para><bold>Financial Services</bold>: Risk calculations with private positions</para>
+</listitem><listitem><para><bold>Healthcare</bold>: Dosage calculations with patient data</para>
+</listitem><listitem><para><bold>Machine Learning</bold>: Model inference with private features</para>
+</listitem><listitem><para><bold>Smart Contracts</bold>: Verify logic without revealing inputs</para>
+</listitem></orderedlist>
+</para>
+</sect1>
+<sect1 id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README_1autotoc_md59">
+<title>Future Directions</title>
+<para><itemizedlist>
+<listitem><para><bold>Homomorphic Operations</bold>: Support for encrypted computation</para>
+</listitem><listitem><para><bold>Zero-Knowledge Proofs</bold>: Prove computation correctness</para>
+</listitem><listitem><para><bold>Distributed Evaluation</bold>: Multi-party secure computation</para>
+</listitem><listitem><para><bold>Type System</bold>: Static verification of hole constraints</para>
+</listitem><listitem><para><bold>JIT Compilation</bold>: Generate optimized native code</para>
+</listitem><listitem><para><bold>Algebraic Environments</bold>: Environments as first-class citizens with set operations</para>
+</listitem><listitem><para><bold>LLM Integration</bold>: Using language models to infer hole values from context</para>
+</listitem><listitem><para><bold>Monadic Lifting</bold>: Lifting aperture expressions to native C++ types</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="d1/d6f/md__2home_2runner_2work_2aperture_2aperture_2README_1autotoc_md60">
+<title>Security Considerations</title>
+<para><itemizedlist>
+<listitem><para>Complexity attacks prevented via computation limits</para>
+</listitem><listitem><para>Side-channel resistance through constant-time operations</para>
+</listitem><listitem><para>Hole sealing prevents unauthorized modifications</para>
+</listitem><listitem><para>Taint tracking identifies values derived from holes</para>
+</listitem></itemizedlist>
+</para>
+<para>This implementation demonstrates that apertures can serve as a practical security primitive for distributed computation, enabling a new class of privacy-preserving applications. </para>
+</sect1>
+    </detaileddescription>
+    <location file="/home/runner/work/aperture/aperture/README.md"/>
+  </compounddef>
+</doxygen>

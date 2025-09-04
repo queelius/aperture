@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_b4091bf290e7821edf4cbc05fe67a61a" kind="dir">
+    <compoundname>/home/runner/work/aperture/aperture</compoundname>
+    <innerdir refid="dir_37ebe734f0a2ec953cef4f19bd1a0c66">/home/runner/work/aperture/aperture/docs</innerdir>
+    <innerfile refid="d5/df8/fluent__api_8hpp">fluent_api.hpp</innerfile>
+    <innerfile refid="df/d34/test__framework_8hpp">test_framework.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/aperture/aperture/"/>
+  </compounddef>
+</doxygen>

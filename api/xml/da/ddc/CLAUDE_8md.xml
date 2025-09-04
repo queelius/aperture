@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="da/ddc/CLAUDE_8md" kind="file" language="Markdown">
+    <compoundname>CLAUDE.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>CLAUDE.md</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>file<sp/>provides<sp/>guidance<sp/>to<sp/>Claude<sp/>Code<sp/>(claude.ai/code)<sp/>when<sp/>working<sp/>with<sp/>code<sp/>in<sp/>this<sp/>repository.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Project<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Aperture<sp/>is<sp/>a<sp/>security-focused<sp/>programming<sp/>language<sp/>that<sp/>uses<sp/>&quot;apertures&quot;<sp/>(holes)<sp/>to<sp/>enable<sp/>secure<sp/>distributed<sp/>computation.<sp/>The<sp/>secure<sp/>implementation<sp/>allows<sp/>untrusted<sp/>servers<sp/>to<sp/>optimize<sp/>and<sp/>partially<sp/>evaluate<sp/>computations<sp/>without<sp/>accessing<sp/>sensitive<sp/>data.<sp/>Expressions<sp/>with<sp/>holes<sp/>(marked<sp/>with<sp/>`?variable`)<sp/>can<sp/>be<sp/>partially<sp/>evaluated,<sp/>preserving<sp/>privacy<sp/>while<sp/>enabling<sp/>optimization.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Build<sp/>Commands</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">#<sp/>Compile<sp/>secure<sp/>language<sp/>implementation<sp/>(C++23<sp/>required)</highlight></codeline>
+<codeline><highlight class="normal">g++<sp/>-std=c++23<sp/>-O2<sp/>aperture.cpp<sp/>demo.cpp<sp/>-o<sp/>demo</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Compile<sp/>and<sp/>run<sp/>tests</highlight></codeline>
+<codeline><highlight class="normal">g++<sp/>-std=c++23<sp/>-O2<sp/>unit_tests.cpp<sp/>aperture.cpp<sp/>-o<sp/>unit_tests</highlight></codeline>
+<codeline><highlight class="normal">g++<sp/>-std=c++23<sp/>-O2<sp/>integration_tests.cpp<sp/>aperture.cpp<sp/>-o<sp/>integration_tests</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Compile<sp/>fluent<sp/>API<sp/>demos</highlight></codeline>
+<codeline><highlight class="normal">g++<sp/>-std=c++23<sp/>-O2<sp/>fluent_demo.cpp<sp/>aperture.cpp<sp/>-o<sp/>fluent_demo</highlight></codeline>
+<codeline><highlight class="normal">g++<sp/>-std=c++23<sp/>-O2<sp/>simple_fluent_demo.cpp<sp/>aperture.cpp<sp/>-o<sp/>simple_fluent_demo</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Compile<sp/>secure<sp/>computation<sp/>demo</highlight></codeline>
+<codeline><highlight class="normal">g++<sp/>-std=c++23<sp/>-O2<sp/>secure_computation_demo.cpp<sp/>aperture.cpp<sp/>-o<sp/>secure_demo</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Run<sp/>Python<sp/>validation<sp/>tests</highlight></codeline>
+<codeline><highlight class="normal">python3<sp/>validate_tests.py</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Code<sp/>Architecture</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Secure<sp/>Implementation<sp/>(`aperture.hpp/cpp`)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>**Value<sp/>System**</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>`Value`<sp/>struct<sp/>with<sp/>variant-based<sp/>type<sp/>system:<sp/>`Nil`,<sp/>`Hole`,<sp/>`Num`,<sp/>`Sym`,<sp/>`Str`,<sp/>`List`,<sp/>`Lambda`</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Holes<sp/>represent<sp/>private/unknown<sp/>values<sp/>with<sp/>optional<sp/>constraints</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Smart<sp/>pointer<sp/>(`shared_ptr`)<sp/>based<sp/>memory<sp/>management</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Metadata<sp/>tracking<sp/>for<sp/>security<sp/>(taint<sp/>analysis,<sp/>complexity<sp/>limits)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">2.<sp/>**Parser**</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Recursive<sp/>descent<sp/>parser<sp/>for<sp/>S-expressions</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Hole<sp/>syntax:<sp/>`?variable`<sp/>or<sp/>`?{variable:constraint}`</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Scientific<sp/>notation<sp/>support<sp/>for<sp/>numbers</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>String<sp/>and<sp/>symbol<sp/>parsing<sp/>with<sp/>proper<sp/>escaping</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">3.<sp/>**Evaluator**<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Stack-based<sp/>evaluation<sp/>with<sp/>frame<sp/>management</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Partial<sp/>evaluation<sp/>with<sp/>holes<sp/>(`partial_eval`)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Hole<sp/>filling<sp/>mechanism<sp/>(`fill_holes`)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Security<sp/>limits<sp/>(max<sp/>depth,<sp/>complexity)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Built-in<sp/>operations:<sp/>arithmetic,<sp/>conditionals,<sp/>let<sp/>bindings,<sp/>lambdas</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Fluent<sp/>C++<sp/>API<sp/>(`fluent_api.hpp`)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>**Expression<sp/>Builder**</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>`Expr`<sp/>class<sp/>with<sp/>operator<sp/>overloading<sp/>for<sp/>natural<sp/>syntax</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Arithmetic<sp/>operators:<sp/>`+`,<sp/>`-`,<sp/>`*`,<sp/>`/`</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Comparison<sp/>operators<sp/>returning<sp/>expressions</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Lambda<sp/>creation<sp/>and<sp/>application</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">2.<sp/>**Computation<sp/>Classes**</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>`Computation`:<sp/>Basic<sp/>evaluation<sp/>and<sp/>hole<sp/>filling</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>`SecureComputation`:<sp/>Untrusted<sp/>server<sp/>workflow<sp/>support</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Method<sp/>chaining<sp/>for<sp/>fluent<sp/>interface</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">3.<sp/>**Builder<sp/>Namespace**</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>`hole()`,<sp/>`num()`,<sp/>`sym()`<sp/>helper<sp/>functions</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Shorthand<sp/>functions:<sp/>`x()`,<sp/>`y()`,<sp/>`z()`<sp/>for<sp/>common<sp/>holes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Plugin<sp/>System<sp/>(`plugins/plugin_interface.hpp`)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>**Plugin<sp/>Interface**</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Base<sp/>`Plugin`<sp/>class<sp/>for<sp/>extending<sp/>evaluation</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>`EvaluationContext`<sp/>provides<sp/>expression<sp/>and<sp/>environment<sp/>info</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>`HoleFillResult`<sp/>with<sp/>confidence<sp/>scores</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">2.<sp/>**Built-in<sp/>Plugins**</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>`PatternMatchPlugin`:<sp/>Fill<sp/>holes<sp/>based<sp/>on<sp/>patterns</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>`MathContextPlugin`:<sp/>Infer<sp/>mathematical<sp/>constants</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Future:<sp/>LLM<sp/>integration<sp/>for<sp/>context-aware<sp/>filling</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">3.<sp/>**Plugin<sp/>Manager**</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Singleton<sp/>for<sp/>plugin<sp/>registration</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Auto-fill<sp/>toggle<sp/>and<sp/>confidence<sp/>thresholds</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Priority-based<sp/>plugin<sp/>evaluation</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Features</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Security<sp/>Properties</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Data<sp/>Privacy**:<sp/>Sensitive<sp/>values<sp/>never<sp/>leave<sp/>trusted<sp/>environment</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Partial<sp/>Evaluation**:<sp/>Untrusted<sp/>nodes<sp/>optimize<sp/>without<sp/>seeing<sp/>private<sp/>data<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Hole<sp/>Tracking**:<sp/>System<sp/>tracks<sp/>unfilled<sp/>variables</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Algebraic<sp/>Simplification**:<sp/>Expressions<sp/>reduce<sp/>while<sp/>preserving<sp/>holes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Hole<sp/>Syntax</highlight></codeline>
+<codeline><highlight class="normal">```lisp</highlight></codeline>
+<codeline><highlight class="normal">?variable<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;<sp/>Simple<sp/>hole</highlight></codeline>
+<codeline><highlight class="normal">?{var:constraint}<sp/><sp/><sp/>;<sp/>Hole<sp/>with<sp/>constraint</highlight></codeline>
+<codeline><highlight class="normal">(+<sp/>?x<sp/>10)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;<sp/>Expression<sp/>with<sp/>hole</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Fluent<sp/>API<sp/>Examples</highlight></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>namespace<sp/>aperture;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>namespace<sp/>aperture::build;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Natural<sp/>arithmetic<sp/>syntax</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>expr<sp/>=<sp/>(hole(&quot;x&quot;)<sp/>+<sp/>num(10))<sp/>*<sp/>num(2);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Evaluate<sp/>with<sp/>hole<sp/>filling</highlight></codeline>
+<codeline><highlight class="normal">Computation<sp/>comp(expr);</highlight></codeline>
+<codeline><highlight class="normal">double<sp/>result<sp/>=<sp/>comp.fill(&quot;x&quot;,<sp/>5).eval();<sp/><sp/>//<sp/>=<sp/>(5+10)*2<sp/>=<sp/>30</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Secure<sp/>computation<sp/>workflow</highlight></codeline>
+<codeline><highlight class="normal">SecureComputation<sp/>secure(expr);</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>optimized<sp/>=<sp/>secure.send_to_server();<sp/><sp/>//<sp/>Partial<sp/>eval</highlight></codeline>
+<codeline><highlight class="normal">double<sp/>final<sp/>=<sp/>secure.fill({{&quot;x&quot;,<sp/>5}}).eval();</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Plugin<sp/>System<sp/>Usage</highlight></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Register<sp/>a<sp/>plugin</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>math_plugin<sp/>=<sp/>std::make_shared&lt;MathContextPlugin&gt;();</highlight></codeline>
+<codeline><highlight class="normal">PluginManager::instance().register_plugin(math_plugin);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Enable<sp/>auto-fill</highlight></codeline>
+<codeline><highlight class="normal">PluginManager::instance().set_auto_fill(true);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Holes<sp/>like<sp/>?pi<sp/>will<sp/>be<sp/>automatically<sp/>filled</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Testing</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>codebase<sp/>includes<sp/>comprehensive<sp/>unit<sp/>and<sp/>integration<sp/>tests:</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`unit_tests.cpp`:<sp/>Tests<sp/>arithmetic,<sp/>conditionals,<sp/>lambdas,<sp/>let<sp/>bindings</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`integration_tests.cpp`:<sp/>Tests<sp/>complete<sp/>workflows<sp/>and<sp/>security<sp/>properties<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`validate_tests.py`:<sp/>Python<sp/>validation<sp/>of<sp/>test<sp/>expectations</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Test<sp/>coverage<sp/>includes<sp/>comparison<sp/>with<sp/>Python<sp/>semantics</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Notes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Requires<sp/>C++23<sp/>compiler<sp/>(GCC<sp/>13+<sp/>or<sp/>Clang<sp/>16+)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Uses<sp/>modern<sp/>C++<sp/>features:<sp/>`std::expected`,<sp/>`std::variant`,<sp/>`std::shared_ptr`</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Secure<sp/>implementation<sp/>focused<sp/>on<sp/>privacy-preserving<sp/>computation</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Plugin<sp/>system<sp/>allows<sp/>extensibility<sp/>for<sp/>hole<sp/>inference<sp/>(LLM<sp/>integration<sp/>planned)</highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/aperture/aperture/CLAUDE.md"/>
+  </compounddef>
+</doxygen>

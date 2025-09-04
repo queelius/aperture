@@ -1,0 +1,554 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d9/ddc/classaperture_1_1Expr" kind="class" language="C++" prot="public">
+    <compoundname>aperture::Expr</compoundname>
+    <includes refid="d5/df8/fluent__api_8hpp" local="no">fluent_api.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d9/ddc/classaperture_1_1Expr_1acedf71dbeb82ca546c8e829fc183180a" prot="private" static="no" mutable="no">
+        <type>secure::ValuePtr</type>
+        <definition>secure::ValuePtr aperture::Expr::val</definition>
+        <argsstring></argsstring>
+        <name>val</name>
+        <qualifiedname>aperture::Expr::val</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="39" column="22" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="39" bodyend="-1"/>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1ad8938d2552a03de773141889098d4ded" compoundref="d5/df8/fluent__api_8hpp" startline="128" endline="131">get_holes</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1a209381a5628dff4606c7db5a5d0e9b0d" compoundref="d5/df8/fluent__api_8hpp" startline="118" endline="118">get_value</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1a75c61eb466ef4b5589cc9ef59650eb01" compoundref="d5/df8/fluent__api_8hpp" startline="121" endline="125">has_holes</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1a9ec3df0de3a5667605ae6b23587dee12" compoundref="d5/df8/fluent__api_8hpp" startline="106" endline="110">operator()</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1ac4b6132514572ab4b6859785125ef5e5" compoundref="d5/df8/fluent__api_8hpp" startline="67" endline="69">operator*</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1a5ef1b70cda35d361c4c943c29c8f647b" compoundref="d5/df8/fluent__api_8hpp" startline="99" endline="102">operator*=</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1a02be101a980c4364da1a1ac707cfeaaa" compoundref="d5/df8/fluent__api_8hpp" startline="59" endline="61">operator+</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1abb9f78111cc48e8e13ce844c71245989" compoundref="d5/df8/fluent__api_8hpp" startline="94" endline="97">operator+=</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1aabd7876fa4fc124850f826baa510d625" compoundref="d5/df8/fluent__api_8hpp" startline="76" endline="78">operator-</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1a85c4d283a965dc9870fbd259ecb93c49" compoundref="d5/df8/fluent__api_8hpp" startline="63" endline="65">operator-</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1ac69cdfe5390c4fa2861e293adb23d36a" compoundref="d5/df8/fluent__api_8hpp" startline="71" endline="73">operator/</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1a669180e27c924bb9c7d060684b2d6adc" compoundref="d5/df8/fluent__api_8hpp" startline="85" endline="87">operator&lt;</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1a3cc898dd5e40f7ce76f703ce712946a9" compoundref="d5/df8/fluent__api_8hpp" startline="89" endline="91">operator==</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1a10c1f562904697cfca06c6b0bfb98bfb" compoundref="d5/df8/fluent__api_8hpp" startline="81" endline="83">operator&gt;</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1adcea8cd2ac6a29432d7e47ed5d612e05" compoundref="d5/df8/fluent__api_8hpp" startline="113" endline="115">to_string</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="d9/ddc/classaperture_1_1Expr_1a8412abda57ded9cbbc7067b335143d7b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class Computation</definition>
+        <argsstring></argsstring>
+        <name>Computation</name>
+        <qualifiedname>aperture::Expr::Computation</qualifiedname>
+        <param>
+          <type><ref refid="d2/d59/classaperture_1_1Computation" kindref="compound">Computation</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="41" column="18" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="d9/ddc/classaperture_1_1Expr_1a0151359fcda013fe919d5d35a02327fe" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class SecureComputation</definition>
+        <argsstring></argsstring>
+        <name>SecureComputation</name>
+        <qualifiedname>aperture::Expr::SecureComputation</qualifiedname>
+        <param>
+          <type><ref refid="db/dd3/classaperture_1_1SecureComputation" kindref="compound">SecureComputation</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="42" column="18" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1ac26bb8edfdda81c4123a6e7b125f1fc0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>aperture::Expr::Expr</definition>
+        <argsstring>()</argsstring>
+        <name>Expr</name>
+        <qualifiedname>aperture::Expr::Expr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="46" column="5" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="46" bodyend="46"/>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1a08e3571795fd516aae9939d952f43bae" compoundref="d5/df8/fluent__api_8hpp" startline="54" endline="56">hole</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1a9ec3df0de3a5667605ae6b23587dee12" compoundref="d5/df8/fluent__api_8hpp" startline="106" endline="110">operator()</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1ac4b6132514572ab4b6859785125ef5e5" compoundref="d5/df8/fluent__api_8hpp" startline="67" endline="69">operator*</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1a02be101a980c4364da1a1ac707cfeaaa" compoundref="d5/df8/fluent__api_8hpp" startline="59" endline="61">operator+</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1aabd7876fa4fc124850f826baa510d625" compoundref="d5/df8/fluent__api_8hpp" startline="76" endline="78">operator-</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1a85c4d283a965dc9870fbd259ecb93c49" compoundref="d5/df8/fluent__api_8hpp" startline="63" endline="65">operator-</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1ac69cdfe5390c4fa2861e293adb23d36a" compoundref="d5/df8/fluent__api_8hpp" startline="71" endline="73">operator/</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1a669180e27c924bb9c7d060684b2d6adc" compoundref="d5/df8/fluent__api_8hpp" startline="85" endline="87">operator&lt;</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1a3cc898dd5e40f7ce76f703ce712946a9" compoundref="d5/df8/fluent__api_8hpp" startline="89" endline="91">operator==</referencedby>
+        <referencedby refid="d9/ddc/classaperture_1_1Expr_1a10c1f562904697cfca06c6b0bfb98bfb" compoundref="d5/df8/fluent__api_8hpp" startline="81" endline="83">operator&gt;</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1a50556721f198b8a87374cc53a77a540f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>aperture::Expr::Expr</definition>
+        <argsstring>(const char *s)</argsstring>
+        <name>Expr</name>
+        <qualifiedname>aperture::Expr::Expr</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="50" column="5" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1acea56b2d2c8048b1c194878370b337e5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>aperture::Expr::Expr</definition>
+        <argsstring>(const std::string &amp;s)</argsstring>
+        <name>Expr</name>
+        <qualifiedname>aperture::Expr::Expr</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="49" column="5" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1a518d566e5cacdf7cfee25859af0540ce" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>aperture::Expr::Expr</definition>
+        <argsstring>(double n)</argsstring>
+        <name>Expr</name>
+        <qualifiedname>aperture::Expr::Expr</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="47" column="5" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1a6de8c67cc70a162cde3fda2f89c9fa97" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>aperture::Expr::Expr</definition>
+        <argsstring>(int n)</argsstring>
+        <name>Expr</name>
+        <qualifiedname>aperture::Expr::Expr</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="48" column="5" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1a78175dcc37ec4017db70271fa69066dc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>aperture::Expr::Expr</definition>
+        <argsstring>(secure::ValuePtr v)</argsstring>
+        <name>Expr</name>
+        <qualifiedname>aperture::Expr::Expr</qualifiedname>
+        <param>
+          <type>secure::ValuePtr</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="51" column="5" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1ad8938d2552a03de773141889098d4ded" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt; std::string &gt; aperture::Expr::get_holes</definition>
+        <argsstring>() const</argsstring>
+        <name>get_holes</name>
+        <qualifiedname>aperture::Expr::get_holes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="128" column="17" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="128" bodyend="131"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1acedf71dbeb82ca546c8e829fc183180a" compoundref="d5/df8/fluent__api_8hpp" startline="39">val</references>
+        <referencedby refid="d2/d59/classaperture_1_1Computation_1a6d1abf0a3860f2153c0b64115e3bffea" compoundref="d5/df8/fluent__api_8hpp" startline="328" endline="330">aperture::Computation::holes</referencedby>
+        <referencedby refid="db/dd3/classaperture_1_1SecureComputation_1a28658a988691662802dd3f134d56f89c" compoundref="d5/df8/fluent__api_8hpp" startline="378" endline="391">aperture::SecureComputation::verify</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1a209381a5628dff4606c7db5a5d0e9b0d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>secure::ValuePtr</type>
+        <definition>secure::ValuePtr aperture::Expr::get_value</definition>
+        <argsstring>() const</argsstring>
+        <name>get_value</name>
+        <qualifiedname>aperture::Expr::get_value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="118" column="22" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="118" bodyend="118"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1acedf71dbeb82ca546c8e829fc183180a" compoundref="d5/df8/fluent__api_8hpp" startline="39">val</references>
+        <referencedby refid="d2/d59/classaperture_1_1Computation_1a36fa86f5fa7fd544b31000839fcc5f38" compoundref="d5/df8/fluent__api_8hpp" startline="260" endline="271">aperture::Computation::eval</referencedby>
+        <referencedby refid="d2/d59/classaperture_1_1Computation_1abbdb0ec8852182bd3ae633b2d8707f90" compoundref="d5/df8/fluent__api_8hpp" startline="274" endline="280">aperture::Computation::eval_expr</referencedby>
+        <referencedby refid="d2/d59/classaperture_1_1Computation_1abe8394ba170e25e58bbe4778c94c649a" compoundref="d5/df8/fluent__api_8hpp" startline="293" endline="309">aperture::Computation::fill</referencedby>
+        <referencedby refid="d2/d59/classaperture_1_1Computation_1a492afba43f605f5d8e26afc9eead26a4" compoundref="d5/df8/fluent__api_8hpp" startline="312" endline="325">aperture::Computation::fill</referencedby>
+        <referencedby refid="d9/dec/namespaceaperture_1_1ops_1a21851a6150c640b738cfb729cce6fe85" compoundref="d5/df8/fluent__api_8hpp" startline="143" endline="150">aperture::ops::if_then_else</referencedby>
+        <referencedby refid="d9/dec/namespaceaperture_1_1ops_1acafc8da9a86ab6bb1832668efe30e617" compoundref="d5/df8/fluent__api_8hpp" startline="211" endline="220">aperture::ops::lambda</referencedby>
+        <referencedby refid="d9/dec/namespaceaperture_1_1ops_1ae8352b54472de5a2798f4e40c7faf667" compoundref="d5/df8/fluent__api_8hpp" startline="223" endline="240">aperture::ops::lambda</referencedby>
+        <referencedby refid="d9/dec/namespaceaperture_1_1ops_1aebc5ba1a632cb9f8f31814cc3731ecfa" compoundref="d5/df8/fluent__api_8hpp" startline="153" endline="161">aperture::ops::let</referencedby>
+        <referencedby refid="d9/dec/namespaceaperture_1_1ops_1a062f8920ee3752e1cfa47bc050d9d1b5" compoundref="d5/df8/fluent__api_8hpp" startline="164" endline="175">aperture::ops::let</referencedby>
+        <referencedby refid="d9/d32/classaperture_1_1ops_1_1LambdaBuilder_1a1990e4ec7acbe24cde26113e3021cffe" compoundref="d5/df8/fluent__api_8hpp" startline="185" endline="207">aperture::ops::LambdaBuilder&lt; F &gt;::operator[]</referencedby>
+        <referencedby refid="d2/d59/classaperture_1_1Computation_1ae6996ff6cfb2ab35ade189bc6b925d96" compoundref="d5/df8/fluent__api_8hpp" startline="283" endline="289">aperture::Computation::partial_eval</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1a75c61eb466ef4b5589cc9ef59650eb01" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool aperture::Expr::has_holes</definition>
+        <argsstring>() const</argsstring>
+        <name>has_holes</name>
+        <qualifiedname>aperture::Expr::has_holes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="121" column="10" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="121" bodyend="125"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1acedf71dbeb82ca546c8e829fc183180a" compoundref="d5/df8/fluent__api_8hpp" startline="39">val</references>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1a9ec3df0de3a5667605ae6b23587dee12" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref></type>
+        <definition>Expr aperture::Expr::operator()</definition>
+        <argsstring>(Args &amp;&amp;... args) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>aperture::Expr::operator()</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="106" column="10" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="106" bodyend="110"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1ac26bb8edfdda81c4123a6e7b125f1fc0" compoundref="d5/df8/fluent__api_8hpp" startline="46" endline="46">Expr</references>
+        <references refid="d9/ddc/classaperture_1_1Expr_1acedf71dbeb82ca546c8e829fc183180a" compoundref="d5/df8/fluent__api_8hpp" startline="39">val</references>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1ac4b6132514572ab4b6859785125ef5e5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref></type>
+        <definition>Expr aperture::Expr::operator*</definition>
+        <argsstring>(const Expr &amp;other) const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>aperture::Expr::operator*</qualifiedname>
+        <param>
+          <type>const <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="67" column="10" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="67" bodyend="69"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1ac26bb8edfdda81c4123a6e7b125f1fc0" compoundref="d5/df8/fluent__api_8hpp" startline="46" endline="46">Expr</references>
+        <references refid="d9/ddc/classaperture_1_1Expr_1acedf71dbeb82ca546c8e829fc183180a" compoundref="d5/df8/fluent__api_8hpp" startline="39">val</references>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1a5ef1b70cda35d361c4c943c29c8f647b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &amp;</type>
+        <definition>Expr &amp; aperture::Expr::operator*=</definition>
+        <argsstring>(const Expr &amp;other)</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>aperture::Expr::operator*=</qualifiedname>
+        <param>
+          <type>const <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="99" column="10" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="99" bodyend="102"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1acedf71dbeb82ca546c8e829fc183180a" compoundref="d5/df8/fluent__api_8hpp" startline="39">val</references>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1a02be101a980c4364da1a1ac707cfeaaa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref></type>
+        <definition>Expr aperture::Expr::operator+</definition>
+        <argsstring>(const Expr &amp;other) const</argsstring>
+        <name>operator+</name>
+        <qualifiedname>aperture::Expr::operator+</qualifiedname>
+        <param>
+          <type>const <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="59" column="10" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="59" bodyend="61"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1ac26bb8edfdda81c4123a6e7b125f1fc0" compoundref="d5/df8/fluent__api_8hpp" startline="46" endline="46">Expr</references>
+        <references refid="d9/ddc/classaperture_1_1Expr_1acedf71dbeb82ca546c8e829fc183180a" compoundref="d5/df8/fluent__api_8hpp" startline="39">val</references>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1abb9f78111cc48e8e13ce844c71245989" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &amp;</type>
+        <definition>Expr &amp; aperture::Expr::operator+=</definition>
+        <argsstring>(const Expr &amp;other)</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>aperture::Expr::operator+=</qualifiedname>
+        <param>
+          <type>const <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="94" column="10" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="94" bodyend="97"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1acedf71dbeb82ca546c8e829fc183180a" compoundref="d5/df8/fluent__api_8hpp" startline="39">val</references>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1aabd7876fa4fc124850f826baa510d625" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref></type>
+        <definition>Expr aperture::Expr::operator-</definition>
+        <argsstring>() const</argsstring>
+        <name>operator-</name>
+        <qualifiedname>aperture::Expr::operator-</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="76" column="10" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="76" bodyend="78"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1ac26bb8edfdda81c4123a6e7b125f1fc0" compoundref="d5/df8/fluent__api_8hpp" startline="46" endline="46">Expr</references>
+        <references refid="d9/ddc/classaperture_1_1Expr_1acedf71dbeb82ca546c8e829fc183180a" compoundref="d5/df8/fluent__api_8hpp" startline="39">val</references>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1a85c4d283a965dc9870fbd259ecb93c49" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref></type>
+        <definition>Expr aperture::Expr::operator-</definition>
+        <argsstring>(const Expr &amp;other) const</argsstring>
+        <name>operator-</name>
+        <qualifiedname>aperture::Expr::operator-</qualifiedname>
+        <param>
+          <type>const <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="63" column="10" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="63" bodyend="65"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1ac26bb8edfdda81c4123a6e7b125f1fc0" compoundref="d5/df8/fluent__api_8hpp" startline="46" endline="46">Expr</references>
+        <references refid="d9/ddc/classaperture_1_1Expr_1acedf71dbeb82ca546c8e829fc183180a" compoundref="d5/df8/fluent__api_8hpp" startline="39">val</references>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1ac69cdfe5390c4fa2861e293adb23d36a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref></type>
+        <definition>Expr aperture::Expr::operator/</definition>
+        <argsstring>(const Expr &amp;other) const</argsstring>
+        <name>operator/</name>
+        <qualifiedname>aperture::Expr::operator/</qualifiedname>
+        <param>
+          <type>const <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="71" column="10" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="71" bodyend="73"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1ac26bb8edfdda81c4123a6e7b125f1fc0" compoundref="d5/df8/fluent__api_8hpp" startline="46" endline="46">Expr</references>
+        <references refid="d9/ddc/classaperture_1_1Expr_1acedf71dbeb82ca546c8e829fc183180a" compoundref="d5/df8/fluent__api_8hpp" startline="39">val</references>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1a669180e27c924bb9c7d060684b2d6adc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref></type>
+        <definition>Expr aperture::Expr::operator&lt;</definition>
+        <argsstring>(const Expr &amp;other) const</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>aperture::Expr::operator&lt;</qualifiedname>
+        <param>
+          <type>const <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="85" column="5" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="85" bodyend="87"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1ac26bb8edfdda81c4123a6e7b125f1fc0" compoundref="d5/df8/fluent__api_8hpp" startline="46" endline="46">Expr</references>
+        <references refid="d9/ddc/classaperture_1_1Expr_1acedf71dbeb82ca546c8e829fc183180a" compoundref="d5/df8/fluent__api_8hpp" startline="39">val</references>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1a3cc898dd5e40f7ce76f703ce712946a9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref></type>
+        <definition>Expr aperture::Expr::operator==</definition>
+        <argsstring>(const Expr &amp;other) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>aperture::Expr::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="89" column="10" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="89" bodyend="91"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1ac26bb8edfdda81c4123a6e7b125f1fc0" compoundref="d5/df8/fluent__api_8hpp" startline="46" endline="46">Expr</references>
+        <references refid="d9/ddc/classaperture_1_1Expr_1acedf71dbeb82ca546c8e829fc183180a" compoundref="d5/df8/fluent__api_8hpp" startline="39">val</references>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1a10c1f562904697cfca06c6b0bfb98bfb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref></type>
+        <definition>Expr aperture::Expr::operator&gt;</definition>
+        <argsstring>(const Expr &amp;other) const</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>aperture::Expr::operator&gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="81" column="10" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="81" bodyend="83"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1ac26bb8edfdda81c4123a6e7b125f1fc0" compoundref="d5/df8/fluent__api_8hpp" startline="46" endline="46">Expr</references>
+        <references refid="d9/ddc/classaperture_1_1Expr_1acedf71dbeb82ca546c8e829fc183180a" compoundref="d5/df8/fluent__api_8hpp" startline="39">val</references>
+      </memberdef>
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1adcea8cd2ac6a29432d7e47ed5d612e05" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string aperture::Expr::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>aperture::Expr::to_string</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="113" column="17" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="113" bodyend="115"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1acedf71dbeb82ca546c8e829fc183180a" compoundref="d5/df8/fluent__api_8hpp" startline="39">val</references>
+        <referencedby refid="d5/dca/namespaceaperture_1a19c3bd2e6b9898d1f6d91c5e11e7dd6d" compoundref="d5/df8/fluent__api_8hpp" startline="436" endline="438">aperture::operator&lt;&lt;</referencedby>
+        <referencedby refid="db/dd3/classaperture_1_1SecureComputation_1a90f59528e017955ac27d1e5c8b861787" compoundref="d5/df8/fluent__api_8hpp" startline="362" endline="375">aperture::SecureComputation::send_to_server</referencedby>
+        <referencedby refid="d2/d59/classaperture_1_1Computation_1a2bb28574bba9ef07b79d9db98aef83ba" compoundref="d5/df8/fluent__api_8hpp" startline="333" endline="335">aperture::Computation::to_string</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="d9/ddc/classaperture_1_1Expr_1a08e3571795fd516aae9939d952f43bae" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref></type>
+        <definition>static Expr aperture::Expr::hole</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>hole</name>
+        <qualifiedname>aperture::Expr::hole</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="54" column="17" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="54" bodyend="56"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1ac26bb8edfdda81c4123a6e7b125f1fc0" compoundref="d5/df8/fluent__api_8hpp" startline="46" endline="46">Expr</references>
+        <referencedby refid="dc/d1b/namespaceaperture_1_1build_1a6a50c75c9bd356f7389b861115a53f80" compoundref="d5/df8/fluent__api_8hpp" startline="415" endline="417">aperture::build::hole</referencedby>
+        <referencedby refid="d6/df5/classaperture_1_1Hole_1a2e1f11aa96bef6ccc2048cbaa86c4c95" compoundref="d5/df8/fluent__api_8hpp" startline="136" endline="138">aperture::Hole&lt; T &gt;::operator Expr</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>aperture::Expr</label>
+        <link refid="d9/ddc/classaperture_1_1Expr"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>val</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ValuePtr</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/aperture/aperture/fluent_api.hpp" line="38" column="1" bodyfile="/home/runner/work/aperture/aperture/fluent_api.hpp" bodystart="38" bodyend="132"/>
+    <listofallmembers>
+      <member refid="d9/ddc/classaperture_1_1Expr_1a8412abda57ded9cbbc7067b335143d7b" prot="private" virt="non-virtual"><scope>aperture::Expr</scope><name>Computation</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1ac26bb8edfdda81c4123a6e7b125f1fc0" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>Expr</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1a518d566e5cacdf7cfee25859af0540ce" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>Expr</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1a6de8c67cc70a162cde3fda2f89c9fa97" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>Expr</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1acea56b2d2c8048b1c194878370b337e5" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>Expr</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1a50556721f198b8a87374cc53a77a540f" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>Expr</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1a78175dcc37ec4017db70271fa69066dc" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>Expr</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1ad8938d2552a03de773141889098d4ded" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>get_holes</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1a209381a5628dff4606c7db5a5d0e9b0d" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>get_value</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1a75c61eb466ef4b5589cc9ef59650eb01" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>has_holes</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1a08e3571795fd516aae9939d952f43bae" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>hole</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1a9ec3df0de3a5667605ae6b23587dee12" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>operator()</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1ac4b6132514572ab4b6859785125ef5e5" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>operator*</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1a5ef1b70cda35d361c4c943c29c8f647b" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>operator*=</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1a02be101a980c4364da1a1ac707cfeaaa" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>operator+</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1abb9f78111cc48e8e13ce844c71245989" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>operator+=</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1a85c4d283a965dc9870fbd259ecb93c49" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>operator-</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1aabd7876fa4fc124850f826baa510d625" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>operator-</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1ac69cdfe5390c4fa2861e293adb23d36a" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>operator/</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1a669180e27c924bb9c7d060684b2d6adc" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>operator&lt;</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1a3cc898dd5e40f7ce76f703ce712946a9" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>operator==</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1a10c1f562904697cfca06c6b0bfb98bfb" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>operator&gt;</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1a0151359fcda013fe919d5d35a02327fe" prot="private" virt="non-virtual"><scope>aperture::Expr</scope><name>SecureComputation</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1adcea8cd2ac6a29432d7e47ed5d612e05" prot="public" virt="non-virtual"><scope>aperture::Expr</scope><name>to_string</name></member>
+      <member refid="d9/ddc/classaperture_1_1Expr_1acedf71dbeb82ca546c8e829fc183180a" prot="private" virt="non-virtual"><scope>aperture::Expr</scope><name>val</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,9 @@
+<map id="aperture::Hole&lt; T &gt;" name="aperture::Hole&lt; T &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="45,93,198,119"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,64,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="53,40,77,67,106,91,102,95,73,71,49,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="88,5,155,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="124,45,124,93,119,93,119,45"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="179,5,229,31"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="192,44,170,71,141,95,137,91,166,67,188,40"/>
+</map>

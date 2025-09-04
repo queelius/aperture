@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="df/dc1/namespacesecure" kind="namespace" language="C++">
+    <compoundname>secure</compoundname>
+    <innernamespace refid="dd/d5a/namespacesecure_1_1test">secure::test</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/aperture/aperture/test_framework.hpp" line="9" column="1"/>
+  </compounddef>
+</doxygen>

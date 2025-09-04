@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_390463bf31f680e7a9f58c3cf16da08e" kind="dir">
+    <compoundname>/home/runner/work/aperture</compoundname>
+    <innerdir refid="dir_b4091bf290e7821edf4cbc05fe67a61a">/home/runner/work/aperture/aperture</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/aperture/"/>
+  </compounddef>
+</doxygen>

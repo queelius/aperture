@@ -1,0 +1,34 @@
+# Jekyll configuration for GitHub Pages
+theme: jekyll-theme-minimal
+title: Aperture Language
+description: Security-focused programming language with apertures
+author: Alexander Towell
+show_downloads: true
+google_analytics: 
+
+# Navigation
+navigation:
+  - title: Home
+    url: /
+  - title: Design
+    url: /DESIGN
+  - title: Getting Started  
+    url: /getting-started
+  - title: API Reference
+    url: /api/html/
+  - title: GitHub
+    url: https://github.com/queelius/aperture
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Exclude files from site
+exclude:
+  - CMakeLists.txt
+  - Doxyfile.custom
+  - "*.cpp"
+  - "*.hpp"
+  - build/
+  - tests/
