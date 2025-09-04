@@ -1,0 +1,179 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{13}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[Austin and Flanagan(2009)]%
+        {austin2009efficient}
+\bibfield{author}{\bibinfo{person}{Thomas~H Austin} {and}
+  \bibinfo{person}{Cormac Flanagan}.} \bibinfo{year}{2009}\natexlab{}.
+\newblock \showarticletitle{Efficient purely-dynamic information flow
+  analysis}. In \bibinfo{booktitle}{\emph{Proceedings of the ACM SIGPLAN
+  Workshop on Programming Languages and Analysis for Security}}. ACM,
+  \bibinfo{pages}{113--124}.
+\newblock
+
+
+\bibitem[Cheon et~al\mbox{.}(2017)]%
+        {cheon2017homomorphic}
+\bibfield{author}{\bibinfo{person}{Jung~Hee Cheon}, \bibinfo{person}{Andrey
+  Kim}, \bibinfo{person}{Miran Kim}, {and} \bibinfo{person}{Yongsoo Song}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Homomorphic encryption for arithmetic of
+  approximate numbers}. In \bibinfo{booktitle}{\emph{International Conference
+  on the Theory and Application of Cryptology and Information Security}}.
+  Springer, \bibinfo{pages}{409--437}.
+\newblock
+
+
+\bibitem[Costan and Devadas(2016)]%
+        {costan2016intel}
+\bibfield{author}{\bibinfo{person}{Victor Costan} {and}
+  \bibinfo{person}{Srinivas Devadas}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Intel SGX Explained}}.
+\newblock \bibinfo{type}{{T}echnical {R}eport}.
+  \bibinfo{institution}{Cryptology ePrint Archive, Report 2016/086}.
+\newblock
+
+
+\bibitem[Friedman and Wise(1976)]%
+        {friedman1976control}
+\bibfield{author}{\bibinfo{person}{Daniel~P Friedman} {and}
+  \bibinfo{person}{David~S Wise}.} \bibinfo{year}{1976}\natexlab{}.
+\newblock \showarticletitle{Control flow, continuations, and the lambda
+  calculus}. In \bibinfo{booktitle}{\emph{Conference Record of the Third ACM
+  Symposium on Principles of Programming Languages}}. ACM,
+  \bibinfo{pages}{108--116}.
+\newblock
+
+
+\bibitem[Gentry(2009)]%
+        {gentry2009fully}
+\bibfield{author}{\bibinfo{person}{Craig Gentry}.}
+  \bibinfo{year}{2009}\natexlab{}.
+\newblock \showarticletitle{Fully homomorphic encryption using ideal lattices}.
+  In \bibinfo{booktitle}{\emph{Proceedings of the 41st Annual ACM Symposium on
+  Theory of Computing}}. ACM, \bibinfo{pages}{169--178}.
+\newblock
+
+
+\bibitem[Goldreich et~al\mbox{.}(1987)]%
+        {goldreich1987play}
+\bibfield{author}{\bibinfo{person}{Oded Goldreich}, \bibinfo{person}{Silvio
+  Micali}, {and} \bibinfo{person}{Avi Wigderson}.}
+  \bibinfo{year}{1987}\natexlab{}.
+\newblock \showarticletitle{How to play any mental game}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 19th Annual ACM Symposium on
+  Theory of Computing}}. ACM, \bibinfo{pages}{218--229}.
+\newblock
+
+
+\bibitem[Jones et~al\mbox{.}(1993)]%
+        {jones1993partial}
+\bibfield{author}{\bibinfo{person}{Neil~D Jones}, \bibinfo{person}{Carsten~K
+  Gomard}, {and} \bibinfo{person}{Peter Sestoft}.}
+  \bibinfo{year}{1993}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Partial evaluation and automatic program
+  generation}}.
+\newblock \bibinfo{publisher}{Prentice Hall}.
+\newblock
+
+
+\bibitem[King(1976)]%
+        {king1976symbolic}
+\bibfield{author}{\bibinfo{person}{James~C King}.}
+  \bibinfo{year}{1976}\natexlab{}.
+\newblock \showarticletitle{Symbolic execution and program testing}.
+\newblock \bibinfo{journal}{\emph{Commun. ACM}} \bibinfo{volume}{19},
+  \bibinfo{number}{7} (\bibinfo{year}{1976}), \bibinfo{pages}{385--394}.
+\newblock
+
+
+\bibitem[Nielson and Nielson(1992)]%
+        {nielson1992two}
+\bibfield{author}{\bibinfo{person}{Flemming Nielson} {and}
+  \bibinfo{person}{Hanne~Riis Nielson}.} \bibinfo{year}{1992}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Two-level functional languages}}.
+\newblock \bibinfo{publisher}{Cambridge University Press}.
+\newblock
+
+
+\bibitem[Reynolds(1972)]%
+        {reynolds1972definitional}
+\bibfield{author}{\bibinfo{person}{John~C Reynolds}.}
+  \bibinfo{year}{1972}\natexlab{}.
+\newblock \showarticletitle{Definitional interpreters for higher-order
+  programming languages}.
+\newblock \bibinfo{journal}{\emph{Proceedings of the ACM Annual Conference}}
+  \bibinfo{volume}{2} (\bibinfo{year}{1972}), \bibinfo{pages}{717--740}.
+\newblock
+
+
+\bibitem[Sabelfeld and Myers(2003)]%
+        {sabelfeld2003language}
+\bibfield{author}{\bibinfo{person}{Andrei Sabelfeld} {and}
+  \bibinfo{person}{Andrew~C Myers}.} \bibinfo{year}{2003}\natexlab{}.
+\newblock \showarticletitle{Language-based information-flow security}.
+\newblock \bibinfo{journal}{\emph{IEEE Journal on Selected Areas in
+  Communications}} \bibinfo{volume}{21}, \bibinfo{number}{1}
+  (\bibinfo{year}{2003}), \bibinfo{pages}{5--19}.
+\newblock
+
+
+\bibitem[Volpano et~al\mbox{.}(1996)]%
+        {volpano1996sound}
+\bibfield{author}{\bibinfo{person}{Dennis Volpano}, \bibinfo{person}{Cynthia
+  Irvine}, {and} \bibinfo{person}{Geoffrey Smith}.}
+  \bibinfo{year}{1996}\natexlab{}.
+\newblock \showarticletitle{A sound type system for secure flow analysis}. In
+  \bibinfo{booktitle}{\emph{Journal of Computer Security}},
+  Vol.~\bibinfo{volume}{4}. \bibinfo{publisher}{IOS Press},
+  \bibinfo{pages}{167--187}.
+\newblock
+
+
+\bibitem[Yao(1982)]%
+        {yao1982protocols}
+\bibfield{author}{\bibinfo{person}{Andrew~C Yao}.}
+  \bibinfo{year}{1982}\natexlab{}.
+\newblock \showarticletitle{Protocols for secure computations}. In
+  \bibinfo{booktitle}{\emph{23rd Annual Symposium on Foundations of Computer
+  Science}}. IEEE, \bibinfo{pages}{160--164}.
+\newblock
+
+
+\end{thebibliography}

@@ -1,0 +1,13 @@
+test_arithmetic 3 0.000712196
+test_let_bindings 3 0.000576391
+test_conditionals 3 0.000512567
+test_lambda 3 0.000626754
+test_partial_eval 3 0.000521904
+test_error_handling 3 0.000489424
+test_complex_programs 3 0.000604049
+test_special_forms 3 0.000601538
+test_integration 2 0.00144992
+test_security 2 0.0106083
+test_performance 0 0
+---
+test_performance

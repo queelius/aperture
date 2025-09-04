@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="da/ddd/README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>Secure<sp/>Aperture<sp/>Language</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">A<sp/>security-focused<sp/>programming<sp/>language<sp/>that<sp/>uses<sp/>&quot;apertures&quot;<sp/>(holes)<sp/>to<sp/>enable<sp/>secure<sp/>distributed<sp/>computation.<sp/>This<sp/>allows<sp/>untrusted<sp/>servers<sp/>to<sp/>optimize<sp/>and<sp/>partially<sp/>evaluate<sp/>computations<sp/>without<sp/>accessing<sp/>sensitive<sp/>data.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Theoretical<sp/>Foundation</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">When<sp/>mathematicians<sp/>encounter<sp/>symbols<sp/>in<sp/>papers,<sp/>their<sp/>mental<sp/>model<sp/>provides<sp/>the<sp/>binding—the<sp/>*closure*—for<sp/>these<sp/>symbols,<sp/>grounding<sp/>them<sp/>with<sp/>meaning.<sp/>Without<sp/>this<sp/>binding,<sp/>symbols<sp/>remain<sp/>free<sp/>variables,<sp/>and<sp/>the<sp/>expression<sp/>lacks<sp/>unambiguous<sp/>meaning.<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Apertures<sp/>formalize<sp/>this<sp/>ambiguity:<sp/>they<sp/>are<sp/>&quot;openings,<sp/>holes,<sp/>or<sp/>gaps&quot;<sp/>in<sp/>a<sp/>program&apos;s<sp/>specification<sp/>that<sp/>can<sp/>be<sp/>filled<sp/>later.<sp/>Unlike<sp/>traditional<sp/>systems<sp/>that<sp/>fail<sp/>on<sp/>undefined<sp/>variables,<sp/>apertures<sp/>make<sp/>partial<sp/>specifications<sp/>first-class<sp/>citizens.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Core<sp/>Concept</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>key<sp/>innovation<sp/>is<sp/>treating<sp/>incomplete<sp/>program<sp/>specifications<sp/>as<sp/>first-class<sp/>values.<sp/>When<sp/>an<sp/>expression<sp/>contains<sp/>&quot;holes&quot;<sp/>(marked<sp/>with<sp/>`?variable`),<sp/>evaluation<sp/>proceeds<sp/>as<sp/>far<sp/>as<sp/>possible,<sp/>algebraically<sp/>simplifying<sp/>the<sp/>expression<sp/>while<sp/>preserving<sp/>the<sp/>holes<sp/>for<sp/>sensitive<sp/>data.<sp/>This<sp/>enables<sp/>a<sp/>new<sp/>paradigm:<sp/>`eval(aperture<sp/>E)<sp/>=<sp/>aperture<sp/>E`,<sp/>where<sp/>apertures<sp/>are<sp/>values<sp/>that<sp/>represent<sp/>incomplete<sp/>computations.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">┌─────────────────┐<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>┌──────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>Trusted<sp/>Client<sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/>Untrusted<sp/>Server<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">├─────────────────┤<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>├──────────────────┤</highlight></codeline>
+<codeline><highlight class="normal">│<sp/>•<sp/>Private<sp/>data<sp/><sp/>│────────&gt;│<sp/>•<sp/>Partial<sp/>eval<sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/>•<sp/>Fill<sp/>holes<sp/><sp/><sp/><sp/>│<sp/>Formula<sp/>│<sp/>•<sp/>Optimization<sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/>•<sp/>Final<sp/>eval<sp/><sp/><sp/><sp/>│&lt;────────│<sp/>•<sp/>No<sp/>access<sp/>to<sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│Optimized│<sp/><sp/><sp/>private<sp/>data<sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────┘<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└──────────────────┘</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Language<sp/>Features</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Value<sp/>Types</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Nil**:<sp/>Empty<sp/>value</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Numbers**:<sp/>Double-precision<sp/>floating<sp/>point</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Symbols**:<sp/>Variable<sp/>names<sp/>and<sp/>operators</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Strings**:<sp/>Text<sp/>literals</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Lists**:<sp/>S-expressions<sp/>`(op<sp/>arg1<sp/>arg2<sp/>...)`</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Lambdas**:<sp/>Functions<sp/>with<sp/>closures</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Holes**:<sp/>Placeholders<sp/>for<sp/>private<sp/>data<sp/>`?variable`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Core<sp/>Operations</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Arithmetic:<sp/>`+`,<sp/>`-`,<sp/>`*`,<sp/>`/`</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Conditionals:<sp/>`if`</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Bindings:<sp/>`let`,<sp/>`lambda`</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Partial<sp/>evaluation<sp/>with<sp/>algebraic<sp/>simplification</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Security<sp/>Properties</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>**Data<sp/>Privacy**:<sp/>Sensitive<sp/>values<sp/>never<sp/>leave<sp/>the<sp/>trusted<sp/>environment</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>**Computation<sp/>Integrity**:<sp/>Clients<sp/>can<sp/>verify<sp/>the<sp/>structure<sp/>of<sp/>returned<sp/>expressions</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>**Partial<sp/>Evaluation**:<sp/>Untrusted<sp/>nodes<sp/>can<sp/>optimize<sp/>without<sp/>seeing<sp/>private<sp/>data</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>**Hole<sp/>Tracking**:<sp/>System<sp/>tracks<sp/>which<sp/>variables<sp/>remain<sp/>unfilled</highlight></codeline>
+<codeline><highlight class="normal">5.<sp/>**Algebraic<sp/>Simplification**:<sp/>Expressions<sp/>reduce<sp/>to<sp/>normal<sp/>form<sp/>while<sp/>preserving<sp/>holes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Example:<sp/>Tax<sp/>Calculation</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```lisp</highlight></codeline>
+<codeline><highlight class="normal">;;<sp/>Public<sp/>formula<sp/>with<sp/>private<sp/>income</highlight></codeline>
+<codeline><highlight class="normal">(let<sp/>((rate<sp/>0.25)<sp/>(deductions<sp/>5000))</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>(-<sp/>(*<sp/>?income<sp/>rate)<sp/>deductions))</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">;;<sp/>After<sp/>server<sp/>optimization:</highlight></codeline>
+<codeline><highlight class="normal">(-<sp/>(*<sp/>?income<sp/>0.25)<sp/>5000)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">;;<sp/>Client<sp/>fills<sp/>locally:</highlight></codeline>
+<codeline><highlight class="normal">;;<sp/>income<sp/>=<sp/>100000<sp/>→<sp/>Result:<sp/>20000</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Advanced<sp/>Example:<sp/>Symbolic<sp/>Computation</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```lisp</highlight></codeline>
+<codeline><highlight class="normal">;;<sp/>Expression<sp/>with<sp/>free<sp/>variable<sp/>y</highlight></codeline>
+<codeline><highlight class="normal">(lambda<sp/>x<sp/>(*<sp/>(+<sp/>x<sp/>?y)<sp/>(+<sp/>x<sp/>?y)))</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">;;<sp/>Applied<sp/>with<sp/>x=1,<sp/>keeping<sp/>y<sp/>as<sp/>hole:</highlight></codeline>
+<codeline><highlight class="normal">(*<sp/>(+<sp/>1<sp/>?y)<sp/>(+<sp/>1<sp/>?y))</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">;;<sp/>Could<sp/>be<sp/>algebraically<sp/>expanded<sp/>to:</highlight></codeline>
+<codeline><highlight class="normal">(+<sp/>1<sp/>(*<sp/>2<sp/>?y)<sp/>(*<sp/>?y<sp/>?y))</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">;;<sp/>Or<sp/>solved<sp/>symbolically<sp/>for<sp/>specific<sp/>values</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Implementation</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Modern<sp/>C++23<sp/>Design</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`std::expected`<sp/>for<sp/>error<sp/>handling</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`std::variant`<sp/>for<sp/>type-safe<sp/>value<sp/>representation</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`std::shared_ptr`<sp/>for<sp/>automatic<sp/>memory<sp/>management</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Zero-copy<sp/>string<sp/>views<sp/>for<sp/>parsing</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Stack-based<sp/>evaluation<sp/>for<sp/>efficiency</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Performance</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>~0.6<sp/>microseconds<sp/>per<sp/>evaluation<sp/>(simple<sp/>expressions)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>~0.9<sp/>microseconds<sp/>for<sp/>partial<sp/>evaluation<sp/>with<sp/>holes</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Memory-safe<sp/>with<sp/>bounds<sp/>checking</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>DoS<sp/>protection<sp/>via<sp/>complexity<sp/>limits</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Building</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">#<sp/>Requires<sp/>C++23<sp/>compiler<sp/>(GCC<sp/>13+<sp/>or<sp/>Clang<sp/>16+)</highlight></codeline>
+<codeline><highlight class="normal">g++<sp/>-std=c++23<sp/>-O2<sp/>secure_lang.cpp<sp/>demo.cpp<sp/>-o<sp/>demo</highlight></codeline>
+<codeline><highlight class="normal">./demo</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Use<sp/>Cases</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>**Cloud<sp/>Computing**:<sp/>Process<sp/>datasets<sp/>with<sp/>sensitive<sp/>columns</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>**Financial<sp/>Services**:<sp/>Risk<sp/>calculations<sp/>with<sp/>private<sp/>positions</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>**Healthcare**:<sp/>Dosage<sp/>calculations<sp/>with<sp/>patient<sp/>data</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>**Machine<sp/>Learning**:<sp/>Model<sp/>inference<sp/>with<sp/>private<sp/>features</highlight></codeline>
+<codeline><highlight class="normal">5.<sp/>**Smart<sp/>Contracts**:<sp/>Verify<sp/>logic<sp/>without<sp/>revealing<sp/>inputs</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Future<sp/>Directions</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**Homomorphic<sp/>Operations**:<sp/>Support<sp/>for<sp/>encrypted<sp/>computation</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Zero-Knowledge<sp/>Proofs**:<sp/>Prove<sp/>computation<sp/>correctness</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Distributed<sp/>Evaluation**:<sp/>Multi-party<sp/>secure<sp/>computation</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Type<sp/>System**:<sp/>Static<sp/>verification<sp/>of<sp/>hole<sp/>constraints</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**JIT<sp/>Compilation**:<sp/>Generate<sp/>optimized<sp/>native<sp/>code</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Algebraic<sp/>Environments**:<sp/>Environments<sp/>as<sp/>first-class<sp/>citizens<sp/>with<sp/>set<sp/>operations</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**LLM<sp/>Integration**:<sp/>Using<sp/>language<sp/>models<sp/>to<sp/>infer<sp/>hole<sp/>values<sp/>from<sp/>context</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Monadic<sp/>Lifting**:<sp/>Lifting<sp/>aperture<sp/>expressions<sp/>to<sp/>native<sp/>C++<sp/>types</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Security<sp/>Considerations</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Complexity<sp/>attacks<sp/>prevented<sp/>via<sp/>computation<sp/>limits</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Side-channel<sp/>resistance<sp/>through<sp/>constant-time<sp/>operations</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Hole<sp/>sealing<sp/>prevents<sp/>unauthorized<sp/>modifications</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Taint<sp/>tracking<sp/>identifies<sp/>values<sp/>derived<sp/>from<sp/>holes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>implementation<sp/>demonstrates<sp/>that<sp/>apertures<sp/>can<sp/>serve<sp/>as<sp/>a<sp/>practical<sp/>security<sp/>primitive<sp/>for<sp/>distributed<sp/>computation,<sp/>enabling<sp/>a<sp/>new<sp/>class<sp/>of<sp/>privacy-preserving<sp/>applications.</highlight></codeline>
+    </programlisting>
+    <location file="README.md"/>
+  </compounddef>
+</doxygen>

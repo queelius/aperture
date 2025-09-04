@@ -1,0 +1,12 @@
+<map id="aperture::SecureComputation::send_to_server" name="aperture::SecureComputation::send_to_server">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,47,219,87"/>
+<area shape="rect" id="Node000002" href="$d2/d59/classaperture_1_1Computation.html#ae6996ff6cfb2ab35ade189bc6b925d96" title=" " alt="" coords="267,11,436,51"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="218,48,252,43,253,48,219,53"/>
+<area shape="rect" id="Node000004" href="$d9/ddc/classaperture_1_1Expr.html#adcea8cd2ac6a29432d7e47ed5d612e05" title=" " alt="" coords="284,79,419,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="219,78,271,85,270,91,219,84"/>
+<area shape="rect" id="Node000003" href="$d9/ddc/classaperture_1_1Expr.html#a209381a5628dff4606c7db5a5d0e9b0d" title=" " alt="" coords="484,5,627,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="436,26,470,25,470,30,436,31"/>
+<area shape="rect" id="Node000005" href="$df/dc1/namespacesecure.html#a111c484fbf4d62120d4412ed93bdc686" title=" " alt="" coords="490,94,621,119"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="419,99,477,101,476,106,419,104"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="522,96,515,86,519,76,532,70,555,67,584,71,595,80,591,84,581,76,555,73,534,75,522,79,520,85,526,92"/>
+</map>

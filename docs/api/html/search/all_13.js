@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['table_20of_20contents_0',['Table of Contents',['../index.html#autotoc_md1',1,'']]],
+  ['tax_20calculation_1',['Example: Tax Calculation',['../d0/d30/md_README.html#autotoc_md52',1,'']]],
+  ['test_5fframework_2ehpp_2',['test_framework.hpp',['../df/d34/test__framework_8hpp.html',1,'']]],
+  ['test_5fpartial_5feval_3',['test_partial_eval',['../df/da9/classsecure_1_1test_1_1PartialEvalTester.html#a062463c83b34aa6bbd8e9254f0d3fe4a',1,'secure::test::PartialEvalTester']]],
+  ['testcase_4',['TestCase',['../df/dec/structsecure_1_1test_1_1TestRunner_1_1TestCase.html',1,'secure::test::TestRunner']]],
+  ['testing_5',['Testing',['../d8/d00/md_CLAUDE.html#autotoc_md73',1,'']]],
+  ['testrunner_6',['testrunner',['../d2/d78/classsecure_1_1test_1_1TestRunner.html',1,'secure::test::TestRunner'],['../d2/d78/classsecure_1_1test_1_1TestRunner.html#ae5869e19fdd97c46dd1455843ff50a20',1,'secure::test::TestRunner::TestRunner(bool verbose=false)']]],
+  ['tests_7',['tests',['../d2/d78/classsecure_1_1test_1_1TestRunner.html#a02240737f4c319cbc16010f920ba725c',1,'secure::test::TestRunner']]],
+  ['theoretical_20foundation_8',['Theoretical Foundation',['../d0/d30/md_README.html#autotoc_md45',1,'']]],
+  ['threat_20model_9',['Threat Model',['../index.html#autotoc_md31',1,'']]],
+  ['to_5fstring_10',['to_string',['../d2/d59/classaperture_1_1Computation.html#a2bb28574bba9ef07b79d9db98aef83ba',1,'aperture::Computation::to_string()'],['../df/dc1/namespacesecure.html#a111c484fbf4d62120d4412ed93bdc686',1,'secure::to_string()'],['../d9/ddc/classaperture_1_1Expr.html#adcea8cd2ac6a29432d7e47ed5d612e05',1,'aperture::Expr::to_string()']]],
+  ['tolerance_11',['tolerance',['../df/dec/structsecure_1_1test_1_1TestRunner_1_1TestCase.html#a03fc216ad07b5b2e3463133dca82126f',1,'secure::test::TestRunner::TestCase']]],
+  ['tt_20define_20tt_20planned_12',['&lt;tt&gt;define&lt;/tt&gt; (planned)',['../index.html#autotoc_md13',1,'']]],
+  ['tt_20fluent_5fapi_20hpp_20tt_13',['Fluent C++ API (&lt;tt&gt;fluent_api.hpp&lt;/tt&gt;)',['../d8/d00/md_CLAUDE.html#autotoc_md66',1,'']]],
+  ['tt_20if_20tt_20conditional_20expression_14',['&lt;tt&gt;if&lt;/tt&gt; - Conditional Expression',['../index.html#autotoc_md9',1,'']]],
+  ['tt_20lambda_20tt_20function_20definition_15',['&lt;tt&gt;lambda&lt;/tt&gt; - Function Definition',['../index.html#autotoc_md11',1,'']]],
+  ['tt_20let_20tt_20local_20bindings_16',['&lt;tt&gt;let&lt;/tt&gt; - Local Bindings',['../index.html#autotoc_md10',1,'']]],
+  ['tt_20plugins_20plugin_5finterface_20hpp_20tt_17',['Plugin System (&lt;tt&gt;plugins/plugin_interface.hpp&lt;/tt&gt;)',['../d8/d00/md_CLAUDE.html#autotoc_md67',1,'']]],
+  ['tt_20quote_20tt_20planned_18',['&lt;tt&gt;quote&lt;/tt&gt; (planned)',['../index.html#autotoc_md12',1,'']]],
+  ['tt_20secure_5flang_20hpp_20cpp_20tt_19',['Secure Implementation (&lt;tt&gt;secure_lang.hpp/cpp&lt;/tt&gt;)',['../d8/d00/md_CLAUDE.html#autotoc_md65',1,'']]],
+  ['type_20predicates_20planned_20',['Type Predicates (planned)',['../index.html#autotoc_md18',1,'']]],
+  ['type_20system_21',['Type System',['../index.html#autotoc_md38',1,'']]],
+  ['types_22',['types',['../d0/d30/md_README.html#autotoc_md49',1,'Value Types'],['../index.html#autotoc_md6',1,'Value Types']]]
+];

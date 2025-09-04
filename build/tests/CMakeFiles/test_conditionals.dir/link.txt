@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/test_conditionals.dir/link.d CMakeFiles/test_conditionals.dir/test_conditionals.cpp.o -o test_conditionals  ../libaperture_core.a

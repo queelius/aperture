@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/test_lambda.dir/link.d CMakeFiles/test_lambda.dir/test_lambda.cpp.o -o test_lambda  ../libaperture_core.a

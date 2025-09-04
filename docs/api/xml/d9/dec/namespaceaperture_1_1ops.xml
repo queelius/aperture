@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d9/dec/namespaceaperture_1_1ops" kind="namespace" language="C++">
+    <compoundname>aperture::ops</compoundname>
+    <innerclass refid="d9/d32/classaperture_1_1ops_1_1LambdaBuilder" prot="public">aperture::ops::LambdaBuilder</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d9/dec/namespaceaperture_1_1ops_1a21851a6150c640b738cfb729cce6fe85" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref></type>
+        <definition>Expr aperture::ops::if_then_else</definition>
+        <argsstring>(const Expr &amp;cond, const Expr &amp;then_branch, const Expr &amp;else_branch)</argsstring>
+        <name>if_then_else</name>
+        <qualifiedname>aperture::ops::if_then_else</qualifiedname>
+        <param>
+          <type>const <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &amp;</type>
+          <declname>cond</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &amp;</type>
+          <declname>then_branch</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &amp;</type>
+          <declname>else_branch</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="fluent_api.hpp" line="143" column="17" bodyfile="fluent_api.hpp" bodystart="143" bodyend="150"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1a209381a5628dff4606c7db5a5d0e9b0d" compoundref="d5/df8/fluent__api_8hpp" startline="118" endline="118">aperture::Expr::get_value</references>
+      </memberdef>
+      <memberdef kind="function" id="d9/dec/namespaceaperture_1_1ops_1acafc8da9a86ab6bb1832668efe30e617" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref></type>
+        <definition>Expr aperture::ops::lambda</definition>
+        <argsstring>(const std::string &amp;param, std::function&lt; Expr(Expr)&gt; body)</argsstring>
+        <name>lambda</name>
+        <qualifiedname>aperture::ops::lambda</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>param</declname>
+        </param>
+        <param>
+          <type>std::function&lt; <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref>(<ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref>)&gt;</type>
+          <declname>body</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="fluent_api.hpp" line="211" column="17" bodyfile="fluent_api.hpp" bodystart="211" bodyend="220"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1a209381a5628dff4606c7db5a5d0e9b0d" compoundref="d5/df8/fluent__api_8hpp" startline="118" endline="118">aperture::Expr::get_value</references>
+      </memberdef>
+      <memberdef kind="function" id="d9/dec/namespaceaperture_1_1ops_1ae8352b54472de5a2798f4e40c7faf667" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref></type>
+        <definition>Expr aperture::ops::lambda</definition>
+        <argsstring>(const std::vector&lt; std::string &gt; &amp;params, std::function&lt; Expr(std::vector&lt; Expr &gt;)&gt; body)</argsstring>
+        <name>lambda</name>
+        <qualifiedname>aperture::ops::lambda</qualifiedname>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>params</declname>
+        </param>
+        <param>
+          <type>std::function&lt; <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref>(std::vector&lt; <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &gt;)&gt;</type>
+          <declname>body</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="fluent_api.hpp" line="223" column="17" bodyfile="fluent_api.hpp" bodystart="223" bodyend="240"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1a209381a5628dff4606c7db5a5d0e9b0d" compoundref="d5/df8/fluent__api_8hpp" startline="118" endline="118">aperture::Expr::get_value</references>
+      </memberdef>
+      <memberdef kind="function" id="d9/dec/namespaceaperture_1_1ops_1aebc5ba1a632cb9f8f31814cc3731ecfa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref></type>
+        <definition>Expr aperture::ops::let</definition>
+        <argsstring>(const std::string &amp;var, const Expr &amp;value, const Expr &amp;body)</argsstring>
+        <name>let</name>
+        <qualifiedname>aperture::ops::let</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &amp;</type>
+          <declname>body</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="fluent_api.hpp" line="153" column="17" bodyfile="fluent_api.hpp" bodystart="153" bodyend="161"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1a209381a5628dff4606c7db5a5d0e9b0d" compoundref="d5/df8/fluent__api_8hpp" startline="118" endline="118">aperture::Expr::get_value</references>
+      </memberdef>
+      <memberdef kind="function" id="d9/dec/namespaceaperture_1_1ops_1a062f8920ee3752e1cfa47bc050d9d1b5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref></type>
+        <definition>Expr aperture::ops::let</definition>
+        <argsstring>(const std::vector&lt; std::pair&lt; std::string, Expr &gt; &gt; &amp;bindings, const Expr &amp;body)</argsstring>
+        <name>let</name>
+        <qualifiedname>aperture::ops::let</qualifiedname>
+        <param>
+          <type>const std::vector&lt; std::pair&lt; std::string, <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &gt; &gt; &amp;</type>
+          <declname>bindings</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref> &amp;</type>
+          <declname>body</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="fluent_api.hpp" line="164" column="17" bodyfile="fluent_api.hpp" bodystart="164" bodyend="175"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1a209381a5628dff4606c7db5a5d0e9b0d" compoundref="d5/df8/fluent__api_8hpp" startline="118" endline="118">aperture::Expr::get_value</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="fluent_api.hpp" line="141" column="1"/>
+  </compounddef>
+</doxygen>

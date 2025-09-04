@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d9/d32/classaperture_1_1ops_1_1LambdaBuilder" kind="class" language="C++" prot="public">
+    <compoundname>aperture::ops::LambdaBuilder</compoundname>
+    <includes refid="d5/df8/fluent__api_8hpp" local="no">fluent_api.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename F</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d9/d32/classaperture_1_1ops_1_1LambdaBuilder_1a9fd9619d58576fdaf1c260a0dcd8abcb" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; aperture::ops::LambdaBuilder&lt; F &gt;::params</definition>
+        <argsstring></argsstring>
+        <name>params</name>
+        <qualifiedname>aperture::ops::LambdaBuilder::params</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="fluent_api.hpp" line="180" column="21" bodyfile="fluent_api.hpp" bodystart="180" bodyend="-1"/>
+        <referencedby refid="d9/d32/classaperture_1_1ops_1_1LambdaBuilder_1a1990e4ec7acbe24cde26113e3021cffe" compoundref="d5/df8/fluent__api_8hpp" startline="185" endline="207">aperture::ops::LambdaBuilder&lt; F &gt;::operator[]</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d9/d32/classaperture_1_1ops_1_1LambdaBuilder_1a70acec01b103f49b8b3dcc113db83203" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>aperture::ops::LambdaBuilder&lt; F &gt;::LambdaBuilder</definition>
+        <argsstring>(std::initializer_list&lt; std::string &gt; p)</argsstring>
+        <name>LambdaBuilder</name>
+        <qualifiedname>aperture::ops::LambdaBuilder::LambdaBuilder</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; std::string &gt;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="fluent_api.hpp" line="183" column="9" bodyfile="fluent_api.hpp" bodystart="183" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d32/classaperture_1_1ops_1_1LambdaBuilder_1a1990e4ec7acbe24cde26113e3021cffe" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d9/ddc/classaperture_1_1Expr" kindref="compound">Expr</ref></type>
+        <definition>Expr aperture::ops::LambdaBuilder&lt; F &gt;::operator[]</definition>
+        <argsstring>(F body_fn) const</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>aperture::ops::LambdaBuilder::operator[]</qualifiedname>
+        <param>
+          <type>F</type>
+          <declname>body_fn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="fluent_api.hpp" line="185" column="14" bodyfile="fluent_api.hpp" bodystart="185" bodyend="207"/>
+        <references refid="d9/ddc/classaperture_1_1Expr_1a209381a5628dff4606c7db5a5d0e9b0d" compoundref="d5/df8/fluent__api_8hpp" startline="118" endline="118">aperture::Expr::get_value</references>
+        <references refid="d9/d32/classaperture_1_1ops_1_1LambdaBuilder_1a9fd9619d58576fdaf1c260a0dcd8abcb" compoundref="d5/df8/fluent__api_8hpp" startline="180">aperture::ops::LambdaBuilder&lt; F &gt;::params</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>aperture::ops::LambdaBuilder&lt; F &gt;</label>
+        <link refid="d9/d32/classaperture_1_1ops_1_1LambdaBuilder"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>vector&lt; std::string &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="fluent_api.hpp" line="179" column="5" bodyfile="fluent_api.hpp" bodystart="179" bodyend="208"/>
+    <listofallmembers>
+      <member refid="d9/d32/classaperture_1_1ops_1_1LambdaBuilder_1a70acec01b103f49b8b3dcc113db83203" prot="public" virt="non-virtual"><scope>aperture::ops::LambdaBuilder</scope><name>LambdaBuilder</name></member>
+      <member refid="d9/d32/classaperture_1_1ops_1_1LambdaBuilder_1a1990e4ec7acbe24cde26113e3021cffe" prot="public" virt="non-virtual"><scope>aperture::ops::LambdaBuilder</scope><name>operator[]</name></member>
+      <member refid="d9/d32/classaperture_1_1ops_1_1LambdaBuilder_1a9fd9619d58576fdaf1c260a0dcd8abcb" prot="private" virt="non-virtual"><scope>aperture::ops::LambdaBuilder</scope><name>params</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

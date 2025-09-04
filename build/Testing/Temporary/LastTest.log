@@ -1,0 +1,365 @@
+Start testing: Sep 03 18:16 CDT
+----------------------------------------------------------
+1/11 Testing: test_arithmetic
+1/11 Test: test_arithmetic
+Command: "/home/spinoza/github/repos/aperture/build/tests/test_arithmetic"
+Directory: /home/spinoza/github/repos/aperture/build/tests
+"test_arithmetic" start time: Sep 03 18:16 CDT
+Output:
+----------------------------------------------------------
+
+=== Running Test Suite ===
+....................
+
+=== Test Results ===
+Passed: 20/20
+Failed: 0/20
+✓ All tests passed!
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_arithmetic" end time: Sep 03 18:16 CDT
+"test_arithmetic" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/11 Testing: test_let_bindings
+2/11 Test: test_let_bindings
+Command: "/home/spinoza/github/repos/aperture/build/tests/test_let_bindings"
+Directory: /home/spinoza/github/repos/aperture/build/tests
+"test_let_bindings" start time: Sep 03 18:16 CDT
+Output:
+----------------------------------------------------------
+
+=== Running Test Suite ===
+......
+
+=== Test Results ===
+Passed: 6/6
+Failed: 0/6
+✓ All tests passed!
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_let_bindings" end time: Sep 03 18:16 CDT
+"test_let_bindings" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/11 Testing: test_conditionals
+3/11 Test: test_conditionals
+Command: "/home/spinoza/github/repos/aperture/build/tests/test_conditionals"
+Directory: /home/spinoza/github/repos/aperture/build/tests
+"test_conditionals" start time: Sep 03 18:16 CDT
+Output:
+----------------------------------------------------------
+
+=== Running Test Suite ===
+........
+
+=== Test Results ===
+Passed: 8/8
+Failed: 0/8
+✓ All tests passed!
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_conditionals" end time: Sep 03 18:16 CDT
+"test_conditionals" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/11 Testing: test_lambda
+4/11 Test: test_lambda
+Command: "/home/spinoza/github/repos/aperture/build/tests/test_lambda"
+Directory: /home/spinoza/github/repos/aperture/build/tests
+"test_lambda" start time: Sep 03 18:16 CDT
+Output:
+----------------------------------------------------------
+
+=== Running Test Suite ===
+.........
+
+=== Test Results ===
+Passed: 9/9
+Failed: 0/9
+✓ All tests passed!
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_lambda" end time: Sep 03 18:16 CDT
+"test_lambda" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/11 Testing: test_partial_eval
+5/11 Test: test_partial_eval
+Command: "/home/spinoza/github/repos/aperture/build/tests/test_partial_eval"
+Directory: /home/spinoza/github/repos/aperture/build/tests
+"test_partial_eval" start time: Sep 03 18:16 CDT
+Output:
+----------------------------------------------------------
+✓ Simple addition with hole
+✓ Lambda with hole
+✓ Conditional with hole (true)
+
+=== Partial Evaluation Test Results ===
+Passed: 3/3
+Failed: 0/3
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_partial_eval" end time: Sep 03 18:16 CDT
+"test_partial_eval" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/11 Testing: test_error_handling
+6/11 Test: test_error_handling
+Command: "/home/spinoza/github/repos/aperture/build/tests/test_error_handling"
+Directory: /home/spinoza/github/repos/aperture/build/tests
+"test_error_handling" start time: Sep 03 18:16 CDT
+Output:
+----------------------------------------------------------
+✓ Parse error detected (unclosed paren)
+✓ Division by zero detected
+✓ Undefined symbol detected
+✓ Wrong arity detected
+✓ Type error detected
+✓ Hole access denied
+
+=== Error Handling Test Results ===
+Passed: 6/6
+Failed: 0/6
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_error_handling" end time: Sep 03 18:16 CDT
+"test_error_handling" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/11 Testing: test_complex_programs
+7/11 Test: test_complex_programs
+Command: "/home/spinoza/github/repos/aperture/build/tests/test_complex_programs"
+Directory: /home/spinoza/github/repos/aperture/build/tests
+"test_complex_programs" start time: Sep 03 18:16 CDT
+Output:
+----------------------------------------------------------
+
+=== Running Test Suite ===
+........
+
+=== Test Results ===
+Passed: 8/8
+Failed: 0/8
+✓ All tests passed!
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_complex_programs" end time: Sep 03 18:16 CDT
+"test_complex_programs" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/11 Testing: test_special_forms
+8/11 Test: test_special_forms
+Command: "/home/spinoza/github/repos/aperture/build/tests/test_special_forms"
+Directory: /home/spinoza/github/repos/aperture/build/tests
+"test_special_forms" start time: Sep 03 18:16 CDT
+Output:
+----------------------------------------------------------
+================================================
+   SPECIAL FORMS TEST SUITE
+================================================
+
+=== Testing quote ===
+✓ Basic quote works
+✓ Quote syntactic sugar works
+
+=== Testing define ===
+✓ Simple define works
+✓ Function define works
+
+=== Testing cond ===
+✓ Cond works
+
+=== Testing begin ===
+✓ Begin works
+
+=== Testing and/or ===
+✓ AND returns last value
+✓ AND short-circuits
+✓ OR returns first true
+
+=== Testing list operations ===
+✓ Cons works
+✓ Car works
+✓ Cdr works
+✓ List works
+
+=== Testing comparison operations ===
+✓ = works
+✓ < works
+✓ > works
+
+================================================
+Results:
+Passed: 7/7
+Failed: 0/7
+================================================
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_special_forms" end time: Sep 03 18:16 CDT
+"test_special_forms" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/11 Testing: test_integration
+9/11 Test: test_integration
+Command: "/home/spinoza/github/repos/aperture/build/tests/test_integration"
+Directory: /home/spinoza/github/repos/aperture/build/tests
+"test_integration" start time: Sep 03 18:16 CDT
+Output:
+----------------------------------------------------------
+================================================
+   APERTURE INTEGRATION TESTS
+================================================
+
+=== Complete Workflow Test ===
+✓ Complete workflow test passed
+
+=== Recursive Pattern Test ===
+✓ Recursive pattern test passed
+
+=== Security Properties Test ===
+✓ Security properties test passed
+
+=== Performance Test ===
+  Deep nested eval took 395 microseconds
+✓ Performance test passed
+
+================================================
+Integration Test Results:
+Passed: 4/4
+Failed: 0/4
+================================================
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_integration" end time: Sep 03 18:16 CDT
+"test_integration" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/11 Testing: test_security
+10/11 Test: test_security
+Command: "/home/spinoza/github/repos/aperture/build/tests/test_security"
+Directory: /home/spinoza/github/repos/aperture/build/tests
+"test_security" start time: Sep 03 18:16 CDT
+Output:
+----------------------------------------------------------
+================================================
+   APERTURE SECURITY TESTS
+================================================
+
+=== Medical Computation Security Test ===
+✓ Medical computation secure
+
+=== Financial Risk Security Test ===
+✓ Financial risk computation secure
+
+=== Hole Sealing Test ===
+✓ Hole sealing test (stub)
+
+=== Complexity Limits Test ===
+✓ Complexity limits appropriate
+
+================================================
+Security Test Results:
+Passed: 4/4
+Failed: 0/4
+================================================
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"test_security" end time: Sep 03 18:16 CDT
+"test_security" time elapsed: 00:00:00
+----------------------------------------------------------
+
+11/11 Testing: test_performance
+11/11 Test: test_performance
+Command: "/home/spinoza/github/repos/aperture/build/tests/test_performance"
+Directory: /home/spinoza/github/repos/aperture/build/tests
+"test_performance" start time: Sep 03 18:16 CDT
+Output:
+----------------------------------------------------------
+================================================
+   APERTURE PERFORMANCE BENCHMARKS
+================================================
+
+Simple arithmetic:
+  Mean: 10.1463 µs
+  Min:  9.387 µs
+  Max:  41.947 µs
+  Iterations: 10000
+  ⚠ Performance warning: slower than expected
+
+Let bindings:
+  Mean: 13.7681 µs
+  Min:  12.684 µs
+  Max:  98.532 µs
+  Iterations: 10000
+  ✓ Performance acceptable
+
+Lambda application:
+  Mean: 9.29094 µs
+  Min:  8.676 µs
+  Max:  26.619 µs
+  Iterations: 10000
+  ✓ Performance acceptable
+
+Partial eval with holes:
+  Mean: 19.9949 µs
+  Min:  18.754 µs
+  Max:  72.915 µs
+  Iterations: 10000
+  ✓ Performance acceptable
+
+Deep nesting (50 levels):
+  Mean: 196.689 µs
+  Min:  186.094 µs
+  Max:  340.829 µs
+  Iterations: 1000
+  ⚠ Performance warning: slower than expected
+
+Hole filling:
+  Mean: 3.37889 µs
+  Min:  3.116 µs
+  Max:  94.956 µs
+  Iterations: 10000
+  ✓ Performance acceptable
+
+================================================
+⚠ Some benchmarks showed suboptimal performance
+================================================
+<end of output>
+Test time =   0.79 sec
+----------------------------------------------------------
+Test Failed.
+"test_performance" end time: Sep 03 18:16 CDT
+"test_performance" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 03 18:16 CDT
+
+integration =   0.00 sec*proc
+
+performance =   0.79 sec*proc
+
+security =   0.02 sec*proc
+
+unit =   0.01 sec*proc
+

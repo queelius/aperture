@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['secure_0',['secure',['../df/dc1/namespacesecure.html',1,'']]],
+  ['secure_20aperture_20language_1',['Secure Aperture Language',['../d0/d30/md_README.html',1,'']]],
+  ['secure_20implementation_20tt_20secure_5flang_20hpp_20cpp_20tt_2',['Secure Implementation (&lt;tt&gt;secure_lang.hpp/cpp&lt;/tt&gt;)',['../d8/d00/md_CLAUDE.html#autotoc_md65',1,'']]],
+  ['secure_3a_3atest_3',['test',['../dd/d5a/namespacesecure_1_1test.html',1,'secure']]],
+  ['secure_5fcompute_4',['secure_compute',['../db/dd3/classaperture_1_1SecureComputation.html#a62641e690ce3262135ed09503948f6f6',1,'aperture::SecureComputation']]],
+  ['secure_5flang_20hpp_20cpp_20tt_5',['Secure Implementation (&lt;tt&gt;secure_lang.hpp/cpp&lt;/tt&gt;)',['../d8/d00/md_CLAUDE.html#autotoc_md65',1,'']]],
+  ['secure_5flang_2ecpp_6',['secure_lang.cpp',['../d2/d35/secure__lang_8cpp.html',1,'']]],
+  ['securecomputation_7',['securecomputation',['../d9/ddc/classaperture_1_1Expr.html#a0151359fcda013fe919d5d35a02327fe',1,'aperture::Expr::SecureComputation'],['../db/dd3/classaperture_1_1SecureComputation.html',1,'aperture::SecureComputation']]],
+  ['security_20considerations_8',['Security Considerations',['../d0/d30/md_README.html#autotoc_md60',1,'']]],
+  ['security_20limits_9',['Security Limits',['../index.html#autotoc_md33',1,'']]],
+  ['security_20model_10',['Security Model',['../index.html#autotoc_md30',1,'']]],
+  ['security_20properties_11',['security properties',['../d8/d00/md_CLAUDE.html#autotoc_md69',1,'Security Properties'],['../d0/d30/md_README.html#autotoc_md51',1,'Security Properties'],['../index.html#autotoc_md32',1,'Security Properties']]],
+  ['security_20workflow_12',['Security Workflow',['../index.html#autotoc_md24',1,'']]],
+  ['send_5fto_5fserver_13',['send_to_server',['../db/dd3/classaperture_1_1SecureComputation.html#a90f59528e017955ac27d1e5c8b861787',1,'aperture::SecureComputation']]],
+  ['should_5ferror_14',['should_error',['../df/dec/structsecure_1_1test_1_1TestRunner_1_1TestCase.html#af47905810e5d681c6186f4f65d92c218',1,'secure::test::TestRunner::TestCase']]],
+  ['special_20forms_15',['Special Forms',['../index.html#autotoc_md8',1,'']]],
+  ['sym_16',['sym',['../dc/d1b/namespaceaperture_1_1build.html#a4ccc0a2913956a87f7a1f8381624803b',1,'aperture::build']]],
+  ['symbolic_20computation_17',['Advanced Example: Symbolic Computation',['../d0/d30/md_README.html#autotoc_md53',1,'']]],
+  ['syntax_18',['syntax',['../index.html#autotoc_md21',1,'Hole Syntax'],['../d8/d00/md_CLAUDE.html#autotoc_md70',1,'Hole Syntax'],['../index.html#autotoc_md5',1,'Syntax']]],
+  ['system_19',['Type System',['../index.html#autotoc_md38',1,'']]],
+  ['system_20tt_20plugins_20plugin_5finterface_20hpp_20tt_20',['Plugin System (&lt;tt&gt;plugins/plugin_interface.hpp&lt;/tt&gt;)',['../d8/d00/md_CLAUDE.html#autotoc_md67',1,'']]],
+  ['system_20usage_21',['Plugin System Usage',['../d8/d00/md_CLAUDE.html#autotoc_md72',1,'']]]
+];
