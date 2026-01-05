@@ -1,2 +1,0 @@
-/usr/bin/ar qc libaperture_core.a CMakeFiles/aperture_core.dir/aperture.cpp.o
-/usr/bin/ranlib libaperture_core.a

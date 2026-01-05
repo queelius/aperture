@@ -1,131 +1,246 @@
-# Secure Aperture Language
+# Apertures
 
-A security-focused programming language that uses "apertures" (holes) to enable secure distributed computation. This allows untrusted servers to optimize and partially evaluate computations without accessing sensitive data.
+A minimal Lisp-like language where "holes" (written `?x` or `?ns.x`) represent unknown values that can be filled later. This enables pausable, resumable evaluation for coordinating computation across distributed systems.
 
-## Theoretical Foundation
+**This is a coordination primitive, not a security mechanism.** Apertures leak information through program structure and are suitable for honest-but-curious settings where coordination matters more than cryptographic privacy.
 
-When mathematicians encounter symbols in papers, their mental model provides the binding—the *closure*—for these symbols, grounding them with meaning. Without this binding, symbols remain free variables, and the expression lacks unambiguous meaning. 
-
-Apertures formalize this ambiguity: they are "openings, holes, or gaps" in a program's specification that can be filled later. Unlike traditional systems that fail on undefined variables, apertures make partial specifications first-class citizens.
-
-## Core Concept
-
-The key innovation is treating incomplete program specifications as first-class values. When an expression contains "holes" (marked with `?variable`), evaluation proceeds as far as possible, algebraically simplifying the expression while preserving the holes for sensitive data. This enables a new paradigm: `eval(aperture E) = aperture E`, where apertures are values that represent incomplete computations.
-
-## Architecture
-
-```
-┌─────────────────┐         ┌──────────────────┐
-│  Trusted Client │         │ Untrusted Server │
-├─────────────────┤         ├──────────────────┤
-│ • Private data  │────────>│ • Partial eval   │
-│ • Fill holes    │ Formula │ • Optimization   │
-│ • Final eval    │<────────│ • No access to   │
-│                 │Optimized│   private data   │
-└─────────────────┘         └──────────────────┘
-```
-
-## Language Features
-
-### Value Types
-- **Nil**: Empty value
-- **Numbers**: Double-precision floating point
-- **Symbols**: Variable names and operators
-- **Strings**: Text literals
-- **Lists**: S-expressions `(op arg1 arg2 ...)`
-- **Lambdas**: Functions with closures
-- **Holes**: Placeholders for private data `?variable`
-
-### Core Operations
-- Arithmetic: `+`, `-`, `*`, `/`
-- Conditionals: `if`
-- Bindings: `let`, `lambda`
-- Partial evaluation with algebraic simplification
-
-## Security Properties
-
-1. **Data Privacy**: Sensitive values never leave the trusted environment
-2. **Computation Integrity**: Clients can verify the structure of returned expressions
-3. **Partial Evaluation**: Untrusted nodes can optimize without seeing private data
-4. **Hole Tracking**: System tracks which variables remain unfilled
-5. **Algebraic Simplification**: Expressions reduce to normal form while preserving holes
-
-## Example: Tax Calculation
-
-```lisp
-;; Public formula with private income
-(let ((rate 0.25) (deductions 5000))
-  (- (* ?income rate) deductions))
-
-;; After server optimization:
-(- (* ?income 0.25) 5000)
-
-;; Client fills locally:
-;; income = 100000 → Result: 20000
-```
-
-## Advanced Example: Symbolic Computation
-
-```lisp
-;; Expression with free variable y
-(lambda x (* (+ x ?y) (+ x ?y)))
-
-;; Applied with x=1, keeping y as hole:
-(* (+ 1 ?y) (+ 1 ?y))
-
-;; Could be algebraically expanded to:
-(+ 1 (* 2 ?y) (* ?y ?y))
-
-;; Or solved symbolically for specific values
-```
-
-## Implementation
-
-### Modern C++23 Design
-- `std::expected` for error handling
-- `std::variant` for type-safe value representation
-- `std::shared_ptr` for automatic memory management
-- Zero-copy string views for parsing
-- Stack-based evaluation for efficiency
-
-### Performance
-- ~0.6 microseconds per evaluation (simple expressions)
-- ~0.9 microseconds for partial evaluation with holes
-- Memory-safe with bounds checking
-- DoS protection via complexity limits
-
-## Building
+## Installation
 
 ```bash
-# Requires C++23 compiler (GCC 13+ or Clang 16+)
-g++ -std=c++23 -O2 aperture.cpp demo.cpp -o demo
-./demo
+go install github.com/queelius/aperture/cmd/aperture@latest
 ```
 
-## Use Cases
+Or build from source:
 
-1. **Cloud Computing**: Process datasets with sensitive columns
-2. **Financial Services**: Risk calculations with private positions
-3. **Healthcare**: Dosage calculations with patient data
-4. **Machine Learning**: Model inference with private features
-5. **Smart Contracts**: Verify logic without revealing inputs
+```bash
+git clone https://github.com/queelius/aperture
+cd aperture
+go build -o aperture ./cmd/aperture
+```
 
-## Future Directions
+## Quick Start
 
-- **Homomorphic Operations**: Support for encrypted computation
-- **Zero-Knowledge Proofs**: Prove computation correctness
-- **Distributed Evaluation**: Multi-party secure computation
-- **Type System**: Static verification of hole constraints
-- **JIT Compilation**: Generate optimized native code
-- **Algebraic Environments**: Environments as first-class citizens with set operations
-- **LLM Integration**: Using language models to infer hole values from context
-- **Monadic Lifting**: Lifting aperture expressions to native C++ types
+```bash
+# Start REPL
+aperture
 
-## Security Considerations
+# Evaluate an expression
+aperture eval "(+ 3 5)"
+# => 8
 
-- Complexity attacks prevented via computation limits
-- Side-channel resistance through constant-time operations
-- Hole sealing prevents unauthorized modifications
-- Taint tracking identifies values derived from holes
+# Partial evaluation with holes
+echo "(+ 3 ?x 5)" > template.apt
+aperture partial template.apt
+# => (+ 8 ?x)
 
-This implementation demonstrates that apertures can serve as a practical security primitive for distributed computation, enabling a new class of privacy-preserving applications.
+# Fill holes and evaluate
+aperture fill --hole x=10 template.apt
+# => 18
+```
+
+## Core Concepts
+
+### Holes (Apertures)
+
+Holes are placeholders for unknown values:
+
+```lisp
+?x           ; Simple hole
+?client.x    ; Namespaced hole (for multi-party scenarios)
+```
+
+### Partial Evaluation
+
+Expressions with holes are evaluated as far as possible:
+
+```lisp
+(+ 3 ?x 5)        ; => (+ 8 ?x)    ; Constants folded
+(* 0 ?anything)   ; => 0           ; Annihilation rule
+(* 1 ?x)          ; => ?x          ; Identity rule
+(if true ?x ?y)   ; => ?x          ; Conditional elimination
+```
+
+### Hole Filling
+
+Fill holes to complete evaluation:
+
+```lisp
+; Given: (+ 8 ?x)
+; Fill x=10
+; Result: 18
+```
+
+## CLI Commands
+
+```bash
+aperture                        # Start REPL
+aperture run <file>             # Execute a file
+aperture eval "<expr>"          # Evaluate an expression
+aperture partial <file>         # Partial evaluate a file
+aperture fill --hole x=10 <file> # Fill holes and evaluate
+aperture version                # Show version
+```
+
+### REPL Commands
+
+```
+> (define x 10)
+> (+ x 5)
+15
+> :holes (+ ?a ?b)
+a b
+> :partial (+ 3 ?x 5)
+(+ 8 ?x)
+> :env
+x = 10
+> :quit
+```
+
+## Language Reference
+
+### Data Types
+
+- **Numbers**: `42`, `3.14`, `-5`, `1e10`
+- **Strings**: `"hello"`, `"with\nnewline"`
+- **Booleans**: `true`, `false`
+- **Symbols**: `foo`, `my-var`
+- **Lists**: `(1 2 3)`, `(list a b c)`
+- **Holes**: `?x`, `?ns.name`
+
+### Special Forms
+
+```lisp
+(define name value)             ; Define a variable
+(define (name args) body)       ; Define a function
+(lambda (args) body)            ; Anonymous function
+(let ((x 1) (y 2)) body)        ; Local bindings
+(if pred then else)             ; Conditional
+(cond (p1 e1) (p2 e2) (else e)) ; Multi-way conditional
+(quote expr) or 'expr           ; Quote (don't evaluate)
+(begin e1 e2 ... en)            ; Sequence
+```
+
+### Arithmetic
+
+```lisp
+(+ a b ...)    ; Addition
+(- a b)        ; Subtraction
+(* a b ...)    ; Multiplication
+(/ a b)        ; Division
+```
+
+### Comparison
+
+```lisp
+(= a b)        ; Equality
+(< a b)        ; Less than
+(> a b)        ; Greater than
+(<= a b)       ; Less or equal
+(>= a b)       ; Greater or equal
+```
+
+### Logic
+
+```lisp
+(and a b ...)  ; Short-circuit AND
+(or a b ...)   ; Short-circuit OR
+(not a)        ; Negation
+```
+
+### List Operations
+
+```lisp
+(list a b c)   ; Create list
+(head lst)     ; First element
+(tail lst)     ; All but first
+(append l1 l2) ; Concatenate
+(length lst)   ; List length
+(empty? lst)   ; True if empty
+(nth lst n)    ; Element at index
+```
+
+### Hole Operations
+
+```lisp
+(holes expr)   ; List hole names in expr
+(ground? expr) ; True if no holes
+```
+
+## Client-Server Demo
+
+The `demo/query/` directory contains a client-server demo showing the "local computation" pattern from the paper:
+
+```bash
+# Terminal 1: Start server
+go run ./demo/query/server
+
+# Terminal 2: Run client
+go run ./demo/query/client '(+ 3 ?x 5)' x=10
+```
+
+Output:
+```
+=== Step 1: Send to server for optimization ===
+Original: (+ 3 ?x 5)
+Optimized: (+ 8 ?x)
+Unfilled holes: [x]
+
+=== Step 2: Fill holes locally ===
+  x = 10
+
+After fill: (+ 8 10)
+
+=== Step 3: Evaluate locally ===
+Result: 18
+```
+
+## Library Usage
+
+```go
+import (
+    "github.com/queelius/aperture/pkg/parser"
+    "github.com/queelius/aperture/pkg/eval"
+    "github.com/queelius/aperture/pkg/env"
+    "github.com/queelius/aperture/pkg/value"
+)
+
+// Parse and evaluate
+expr, _ := parser.ParseOne("(+ 3 5)")
+e := env.Global()
+result := eval.Eval(expr, e)
+// result = value.Num{Val: 8}
+
+// Partial evaluation
+template, _ := parser.ParseOne("(+ 3 ?x 5)")
+partial := eval.PartialEval(template, e)
+// partial.String() = "(+ 8 ?x)"
+
+// Fill holes
+bindings := map[string]value.Value{"x": value.NewNum(10)}
+filled := eval.Fill(partial, bindings)
+final := eval.Eval(filled, e)
+// final = value.Num{Val: 18}
+```
+
+## When to Use Apertures
+
+**Good for:**
+- Coordinating distributed computation where parties already have partial trust
+- Scenarios where query structure isn't sensitive
+- Local computation with remote optimization assistance
+- Educational tools for teaching distributed computing concepts
+
+**NOT for:**
+- Adversarial environments (no protection against malicious parties)
+- Scenarios requiring cryptographic privacy guarantees
+- High-stakes privacy requirements (medical records, financial data)
+- Any use case where information leakage is unacceptable
+
+## Documentation
+
+- [SPEC.md](SPEC.md) - Full language specification
+- [paper/workshop/](paper/workshop/) - Workshop paper on apertures
+
+## License
+
+MIT

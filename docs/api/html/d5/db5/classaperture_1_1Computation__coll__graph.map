@@ -1,9 +1,0 @@
-<map id="aperture::Computation" name="aperture::Computation">
-<area shape="rect" id="Node000001" title=" " alt="" coords="11,181,180,207"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,89,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="55,132,64,156,83,179,79,182,60,159,50,134"/>
-<area shape="rect" id="Node000003" href="$d9/ddc/classaperture_1_1Expr.html" title=" " alt="" coords="114,93,229,119"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="155,131,131,159,109,183,105,179,127,156,151,127"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="133,5,209,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="174,45,174,93,169,93,169,45"/>
-</map>

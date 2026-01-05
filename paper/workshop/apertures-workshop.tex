@@ -1,0 +1,466 @@
+\documentclass[10pt]{article}
+
+% Workshop paper format - compact single column
+\usepackage[letterpaper, margin=1in]{geometry}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{hyperref}
+
+% Compact spacing for workshop paper
+\usepackage{setspace}
+\setstretch{0.98}
+\setlength{\parskip}{0.5em}
+
+% Define colors for syntax highlighting
+\definecolor{aperture}{RGB}{139, 69, 19}
+\definecolor{keyword}{RGB}{0, 0, 255}
+\definecolor{comment}{RGB}{0, 128, 0}
+
+% Configure listings for Lisp
+\lstdefinestyle{lisp}{
+    basicstyle=\footnotesize\ttfamily,
+    keywordstyle=\color{keyword}\bfseries,
+    commentstyle=\color{comment}\itshape,
+    showstringspaces=false,
+    breaklines=true,
+    frame=none,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    emph={?},
+    emphstyle=\color{aperture}\bfseries,
+}
+\lstset{style=lisp}
+
+\begin{document}
+
+\title{Apertures: Coordinated Partial Evaluation\\for Distributed Computation}
+
+\author{
+Alexander Towell\\
+Department of Computer Science\\
+Southern Illinois University Edwardsville\\
+\texttt{atowell@siue.edu}
+}
+
+\date{}
+
+\maketitle
+
+\begin{abstract}
+We present \textit{apertures}, a coordination mechanism for distributed computation based on partial evaluation with explicit holes. Apertures (denoted \texttt{?variable}) represent unknown expressions that enable pausable and resumable evaluation across multiple parties. Unlike security-focused approaches, we make no claims about privacy preservation—apertures leak information through program structure and evaluation results. Instead, we position apertures as a lightweight coordination primitive for scenarios where parties can share computation structure but need to control when and where data is introduced. We demonstrate practical coordination patterns including multi-party progressive refinement and local computation workflows, where untrusted servers can optimize expressions without seeing private inputs or outputs. Our C++ implementation shows apertures add minimal overhead (2-5\%) compared to direct evaluation while enabling novel distributed computation patterns. We are explicit about limitations: apertures are unsuitable for adversarial settings and should not be used when information leakage is unacceptable.
+\end{abstract}
+
+\section{Introduction}
+
+Distributed computation often requires coordination between parties with different capabilities and trust levels. A common pattern involves untrusted servers with computational resources and clients with private data. Current solutions typically fall into two extremes: full encryption with massive overhead, or complete data sharing with no privacy.
+
+We introduce \textit{apertures}, a coordination mechanism that enables a middle ground through partial evaluation. An aperture, written \texttt{?variable}, is a hole in an expression representing an unknown value or subexpression. Programs with apertures can be partially evaluated, optimized, and transformed by parties that don't know the aperture values. When apertures are eventually filled, evaluation resumes from the partially evaluated state.
+
+\textbf{Critical disclaimer:} Apertures are \textit{not} a security mechanism. They leak information through program structure, evaluation patterns, and algebraic relationships. We make no privacy claims. Instead, apertures provide a coordination primitive for distributed systems where parties need to control the timing and location of data introduction while sharing computational structure.
+
+Consider this local computation pattern:
+\begin{lstlisting}
+;; Server optimizes without data or results
+(let ((plan (server-optimize ?query)))
+  (client-execute plan ?local-data))
+;; Results stay local
+\end{lstlisting}
+
+The server can optimize the query structure without seeing the actual query parameters or the local data. The client benefits from server-side optimization while keeping both inputs and outputs private. However, the server learns the query structure and optimization patterns, which may reveal information about the workload.
+
+Our contributions:
+\begin{itemize}
+\item A simple calculus for partial evaluation with holes
+\item Coordination patterns for distributed computation
+\item Explicit characterization of when apertures should \textit{not} be used
+\item Performance evaluation showing 2-5\% overhead for coordination
+\end{itemize}
+
+\section{The Aperture Language}
+
+\subsection{Core Syntax}
+
+We define a minimal Lisp-like language with apertures:
+
+\begin{align}
+e ::= &\; v \mid x \mid \texttt{?}h \mid (e \; e^*) \mid (\lambda \; (x^*) \; e) \\
+    &\mid (\text{let} \; ((x \; e)^*) \; e) \mid (\text{if} \; e \; e \; e) \\
+v ::= &\; \text{nil} \mid n \mid s \mid \text{bool} \mid \text{list}
+\end{align}
+
+Where $v$ ranges over values, $x$ over variables, $h$ over hole identifiers, and $n$, $s$ over numbers and strings respectively. The key addition is \texttt{?}$h$, representing an aperture (hole).
+
+\textbf{Terminology clarification:} While we write \texttt{?variable} for readability, apertures are not restricted to atomic values. An aperture can be filled with any expression, making them "unknown expressions" in the partial evaluation sense.
+
+\subsection{Evaluation Semantics}
+
+We define evaluation contexts and partial evaluation:
+
+\begin{align}
+E ::= &\; [\cdot] \mid (E \; e^*) \mid (v \; v^* \; E \; e^*) \\
+     &\mid (\text{let} \; ((x \; v)^* \; (x \; E) \; b^*) \; e) \\
+     &\mid (\text{if} \; E \; e \; e)
+\end{align}
+
+Standard evaluation rules apply, with apertures blocking evaluation:
+
+\begin{align}
+E[\texttt{?}h] &\rightarrow_p E[\texttt{?}h] \quad \text{(aperture blocks)} \\
+E[(+ \; n_1 \; n_2)] &\rightarrow n_1 + n_2 \quad \text{(arithmetic)} \\
+E[(+ \; \texttt{?}h \; n)] &\rightarrow_p (+ \; \texttt{?}h \; n) \quad \text{(partial)}
+\end{align}
+
+The key insight: evaluation proceeds until blocked by apertures, creating partially evaluated expressions that preserve computation structure.
+
+\subsection{Hole Filling}
+
+Apertures are filled via substitution:
+$$\text{fill}(e, h, e') = e[e'/\texttt{?}h]$$
+
+After filling, evaluation can resume:
+$$\text{eval}(\text{fill}(e, h, v)) \rightarrow \text{eval}(e[v/\texttt{?}h])$$
+
+Multiple apertures can be filled incrementally, enabling progressive refinement across multiple parties.
+
+\subsection{Algebraic Simplification}
+
+During partial evaluation, we apply algebraic simplifications that preserve apertures:
+
+\begin{align}
+(* \; 0 \; \texttt{?}x) &\rightarrow_p 0 \\
+(+ \; 0 \; \texttt{?}x) &\rightarrow_p \texttt{?}x \\
+(* \; 1 \; \texttt{?}x) &\rightarrow_p \texttt{?}x \\
+(\text{if} \; \text{true} \; e_1 \; e_2) &\rightarrow_p e_1
+\end{align}
+
+These simplifications reduce expression size while maintaining evaluation semantics. However, they also leak information—for example, if $(* \; \texttt{?}x \; e) \rightarrow 0$ where $e$ is a known non-zero constant, this reveals that $\texttt{?}x = 0$.
+
+\section{Coordination Patterns}
+
+Apertures enable several coordination patterns for distributed computation:
+
+\subsection{Progressive Refinement}
+
+Multiple parties can incrementally fill apertures:
+
+\begin{lstlisting}
+;; Initial expression with multiple holes
+(let ((query (select ?table
+                (where (and (> ?col1 ?val1)
+                           (< ?col2 ?val2))))))
+
+  ;; Party A knows table and column names
+  (fill query {table: "users",
+               col1: "age",
+               col2: "salary"})
+
+  ;; Party B knows value constraints
+  (fill query {val1: 18, val2: 100000})
+
+  ;; Execute when all holes filled
+  (execute query))
+\end{lstlisting}
+
+Each party contributes their knowledge without seeing others' contributions until execution.
+
+\subsection{Local Computation Pattern}
+
+The most defensible use case: untrusted optimization with local execution:
+
+\begin{lstlisting}
+;; Client has private data
+(define private-data (load-sensitive))
+
+;; Server optimizes generic computation
+(define (optimize-computation expr)
+  ;; Algebraic simplification
+  ;; Common subexpression elimination
+  ;; Partial evaluation of known parts
+  (simplify expr))
+
+;; Client sends structure, not data
+(define template
+  (sum (map (lambda (x)
+              (* ?weight (f x)))
+            ?data)))
+
+;; Server optimizes without seeing data
+(define optimized
+  (server-optimize template))
+;; Returns: (let ((w ?weight))
+;;            (sum (map (lambda (x)
+;;                        (* w (f x)))
+;;                      ?data)))
+
+;; Client evaluates locally
+(local-eval (fill optimized
+                  {weight: 0.5,
+                   data: private-data}))
+\end{lstlisting}
+
+Benefits:
+\begin{itemize}
+\item Server CPU used for optimization
+\item Data never leaves client
+\item Results stay local
+\item Reduced leakage channels
+\end{itemize}
+
+Limitations:
+\begin{itemize}
+\item Server learns computation structure
+\item Optimization patterns may leak workload information
+\item No protection against malicious servers
+\end{itemize}
+
+\subsection{Speculative Compilation}
+
+Servers can compile multiple specializations:
+
+\begin{lstlisting}
+;; Template with configuration hole
+(define (process-data config data)
+  (case ?config
+    [(fast) (quick-process data)]
+    [(accurate) (slow-process data)]
+    [(balanced) (hybrid-process data)]))
+
+;; Server compiles all branches
+(define compiled
+  (compile-all-paths template))
+
+;; Client selects path at runtime
+(execute compiled {config: 'accurate})
+\end{lstlisting}
+
+The server prepares optimized code paths without knowing which will be used.
+
+\section{Implementation Highlights}
+
+Our C++ implementation provides:
+\begin{itemize}
+\item S-expression parser with aperture syntax
+\item Partial evaluator with algebraic simplification
+\item Hole tracking and filling mechanism
+\item Fluent API for natural expression construction
+\end{itemize}
+
+Key design choices:
+\begin{itemize}
+\item Shared pointer memory management
+\item Visitor pattern for evaluation
+\item Variant-based value representation
+\item Stack-based evaluation with continuation frames
+\end{itemize}
+
+\subsection{Performance Characteristics}
+
+We measured overhead compared to direct evaluation:
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+Operation & Direct ($\mu$s) & With Apertures ($\mu$s) & Overhead \\
+\midrule
+Arithmetic (1000 ops) & 127 & 131 & 3.1\% \\
+List processing & 89 & 93 & 4.5\% \\
+Conditionals & 43 & 44 & 2.3\% \\
+Lambda application & 156 & 164 & 5.1\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Apertures add minimal overhead (2-5\%) while enabling distributed coordination. The overhead comes from:
+\begin{itemize}
+\item Hole checking during evaluation
+\item Maintaining partial evaluation state
+\item Expression reconstruction after simplification
+\end{itemize}
+
+Partial evaluation can actually \textit{improve} performance when expressions are reused with different aperture values, as the partially evaluated form serves as a template.
+
+\section{Case Study: Query Optimization}
+
+Consider a distributed database scenario where a client wants to run complex analytical queries on private data. Traditional approaches either:
+\begin{enumerate}
+\item Send data to server (privacy loss)
+\item Send query to data (lose server optimization)
+\item Use homomorphic encryption (1000× overhead)
+\end{enumerate}
+
+With apertures, we enable a fourth option:
+
+\begin{lstlisting}
+;; Client query template
+(define query-template
+  (select ?private-table
+    (where (and (> profit ?threshold)
+                (in region ?regions)))
+    (group-by department)
+    (having (> (count *) ?min-size))))
+
+;; Server optimizes structure
+(define optimized-plan
+  (server-optimize query-template))
+;; Server can:
+;; - Reorder predicates
+;; - Plan aggregation strategy
+;; - Choose join algorithms
+;; - Prepare indexes
+
+;; Client executes locally
+(define results
+  (local-execute
+    (fill optimized-plan
+          {private-table: my-data,
+           threshold: 1000000,
+           regions: ["NA", "EU"],
+           min-size: 10})))
+\end{lstlisting}
+
+The server provides optimization expertise without seeing:
+\begin{itemize}
+\item Actual table data
+\item Specific threshold values
+\item Selected regions
+\item Query results
+\end{itemize}
+
+However, the server learns:
+\begin{itemize}
+\item Query structure and complexity
+\item Types of operations performed
+\item Optimization applicability
+\end{itemize}
+
+This tradeoff is acceptable when:
+\begin{itemize}
+\item Query patterns are not sensitive
+\item Optimization benefits outweigh leakage
+\item Server is honest-but-curious, not malicious
+\end{itemize}
+
+\section{Related Work}
+
+\textbf{Partial evaluation} \cite{jones1993partial}: Apertures extend partial evaluation with explicit holes for multi-party coordination. Unlike traditional partial evaluation which requires all static values upfront, apertures allow incremental filling.
+
+\textbf{Staged computation} \cite{taha1997multi}: Multi-stage programming separates computation phases. Apertures provide a simpler mechanism focused on coordination rather than performance.
+
+\textbf{Homomorphic encryption} \cite{gentry2009fully}: FHE provides cryptographic privacy but with 1000-10000× overhead. Apertures trade privacy for practical performance.
+
+\textbf{Secure multi-party computation} \cite{yao1982protocols}: MPC protocols provide strong security guarantees through cryptographic protocols. Apertures offer a lightweight alternative for non-adversarial settings.
+
+\textbf{Information flow control} \cite{sabelfeld2003language}: Type systems can track information flow statically. Apertures provide dynamic coordination without static guarantees.
+
+\section{Limitations: When NOT to Use Apertures}
+
+We explicitly enumerate scenarios where apertures are inappropriate:
+
+\subsection{Adversarial Settings}
+Apertures provide \textbf{no protection} against malicious parties. An adversary can:
+\begin{itemize}
+\item Infer aperture values from program structure
+\item Use algebraic relationships to constrain possibilities
+\item Exploit side channels in evaluation patterns
+\item Inject malicious code during partial evaluation
+\end{itemize}
+
+\subsection{High-Sensitivity Data}
+When data sensitivity is high, apertures leak too much:
+\begin{itemize}
+\item Medical records: Disease patterns visible in query structure
+\item Financial data: Trading strategies revealed by operations
+\item Personal data: Behavioral patterns in access patterns
+\end{itemize}
+
+\subsection{Regulatory Compliance}
+Apertures cannot provide guarantees required by:
+\begin{itemize}
+\item GDPR: No verifiable data protection
+\item HIPAA: Insufficient privacy safeguards
+\item Financial regulations: No audit trail of data access
+\end{itemize}
+
+\subsection{Information Leakage Examples}
+
+Consider this expression:
+\begin{lstlisting}
+(if (> ?age 65)
+    (discount 0.2)
+    (if (< ?age 18)
+        (discount 0.1)
+        (no-discount)))
+\end{lstlisting}
+
+Even without knowing \texttt{?age}, observers learn:
+\begin{itemize}
+\item System has age-based discrimination
+\item Exact discount tiers
+\item Business logic for pricing
+\end{itemize}
+
+Or this query:
+\begin{lstlisting}
+(select users
+  (where (and (= status ?s)
+              (> last-login ?date)
+              (in department ?dept))))
+\end{lstlisting}
+
+Structure alone reveals:
+\begin{itemize}
+\item Organization has departments
+\item Tracks login times
+\item Has user statuses
+\item Performs temporal queries
+\end{itemize}
+
+\subsection{When Apertures ARE Appropriate}
+
+Apertures work well when:
+\begin{itemize}
+\item Computation structure is not sensitive
+\item Parties are honest-but-curious, not adversarial
+\item Performance matters more than perfect privacy
+\item Coordination benefits outweigh leakage risks
+\item Local computation can limit result leakage
+\end{itemize}
+
+Examples of good use cases:
+\begin{itemize}
+\item Scientific computing with public algorithms
+\item Optimization of non-sensitive business logic
+\item Collaborative debugging and testing
+\item Educational and demonstration systems
+\end{itemize}
+
+\section{Conclusion}
+
+Apertures provide a lightweight coordination mechanism for distributed computation through partial evaluation with holes. We make no security claims—apertures leak information through structure and evaluation patterns. Instead, they offer a practical tool for scenarios where parties need to coordinate computation while controlling when and where data is introduced.
+
+The key insight is that many real-world scenarios don't require cryptographic privacy but do need coordination primitives. Apertures fill this gap with minimal overhead (2-5\%) while enabling patterns like local computation with remote optimization.
+
+Future work includes:
+\begin{itemize}
+\item Quantifying information leakage formally
+\item Combining apertures with oblivious algorithms
+\item Exploring apertures in specific domains (databases, ML)
+\item Building practical systems using aperture coordination
+\item \textbf{LLM-based automatic hole inference}: Integrating large language models to automatically fill apertures based on context. The hole name and surrounding computation could provide sufficient context for an LLM to infer appropriate values or implementations. For example, \texttt{?load-customer-data} could be automatically filled with an appropriate SQL query, or \texttt{?aggregation-fn} could be filled based on domain context (financial $\rightarrow$ sum, health $\rightarrow$ average). This would enable a new paradigm of \emph{approximate program specification} where developers express intent through named holes and AI completes the implementation.
+\end{itemize}
+
+We hope apertures contribute to the discussion of practical coordination mechanisms that acknowledge rather than obscure their limitations. Not every distributed computation needs cryptographic security, but all need clear understanding of their tradeoffs.
+
+\bibliographystyle{plain}
+\bibliography{references-workshop}
+
+\end{document}

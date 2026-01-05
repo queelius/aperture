@@ -1,0 +1,30 @@
+; Basic apertures examples
+
+; Simple arithmetic
+(+ 3 5)
+
+; Partial evaluation with holes
+(+ 3 ?x 5)
+
+; Algebraic simplification
+(* 0 ?anything)
+
+; Lambda
+((lambda (x) (+ x 1)) 5)
+
+; Define a function
+(define (double x) (* x 2))
+(double 21)
+
+; Let binding
+(let ((x 10)
+      (y 20))
+  (+ x y))
+
+; Conditional
+(if true 1 2)
+
+; List operations
+(list 1 2 3)
+(head (list 1 2 3))
+(tail (list 1 2 3))

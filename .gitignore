@@ -1,32 +1,47 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
+# Go binaries
+*.exe
+*.exe~
+*.dll
 *.so
 *.dylib
-*.dll
+aperture
 
-# Fortran module files
-*.mod
-*.smod
+# Go test binaries
+*.test
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
+# Go coverage
 *.out
-*.app
+coverage.html
+
+# Go build cache
+/vendor/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# LaTeX (for paper/)
+*.aux
+*.bbl
+*.blg
+*.log
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.toc
+*.lot
+*.lof
+*.idx
+*.ilg
+*.ind
+*.out
+
+# Temporary
+*.tmp
+*.bak
+*.backup
+.cache/

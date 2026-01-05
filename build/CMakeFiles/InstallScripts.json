@@ -1,8 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/home/spinoza/github/repos/aperture/build/cmake_install.cmake",
-		"/home/spinoza/github/repos/aperture/build/tests/cmake_install.cmake"
-	],
-	"Parallel" : false
-}

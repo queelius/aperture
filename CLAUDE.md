@@ -1,145 +1,87 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code when working with code in this repository.
 
 ## Project Overview
 
-Aperture is a security-focused programming language that uses "apertures" (holes) to enable secure distributed computation. The secure implementation allows untrusted servers to optimize and partially evaluate computations without accessing sensitive data. Expressions with holes (marked with `?variable`) can be partially evaluated, preserving privacy while enabling optimization.
+Aperture is a minimal Lisp-like language where "holes" (written `?x` or `?ns.x`) represent unknown values that can be filled later. This enables pausable, resumable evaluation for coordinating computation across distributed systems.
+
+**This is a coordination primitive, not a security mechanism.** Apertures leak information through program structure and are suitable for honest-but-curious settings where coordination matters more than cryptographic privacy.
 
 ## Build Commands
 
 ```bash
-# Compile secure language implementation (C++23 required)
-g++ -std=c++23 -O2 aperture.cpp demo.cpp -o demo
+# Build the CLI
+go build -o aperture ./cmd/aperture
 
-# Compile and run tests
-g++ -std=c++23 -O2 unit_tests.cpp aperture.cpp -o unit_tests
-g++ -std=c++23 -O2 integration_tests.cpp aperture.cpp -o integration_tests
+# Run tests
+go test ./...
 
-# Compile fluent API demos
-g++ -std=c++23 -O2 fluent_demo.cpp aperture.cpp -o fluent_demo
-g++ -std=c++23 -O2 simple_fluent_demo.cpp aperture.cpp -o simple_fluent_demo
+# Run with race detector
+go test -race ./...
 
-# Compile secure computation demo
-g++ -std=c++23 -O2 secure_computation_demo.cpp aperture.cpp -o secure_demo
+# Run a specific package's tests
+go test ./pkg/parser/...
 
-# Run Python validation tests
-python3 validate_tests.py
+# Build and install globally
+go install ./cmd/aperture
 ```
 
 ## Code Architecture
 
-### Secure Implementation (`aperture.hpp/cpp`)
+### Package Structure
 
-1. **Value System**
-   - `Value` struct with variant-based type system: `Nil`, `Hole`, `Num`, `Sym`, `Str`, `List`, `Lambda`
-   - Holes represent private/unknown values with optional constraints
-   - Smart pointer (`shared_ptr`) based memory management
-   - Metadata tracking for security (taint analysis, complexity limits)
-
-2. **Parser**
-   - Recursive descent parser for S-expressions
-   - Hole syntax: `?variable` or `?{variable:constraint}`
-   - Scientific notation support for numbers
-   - String and symbol parsing with proper escaping
-
-3. **Evaluator** 
-   - Stack-based evaluation with frame management
-   - Partial evaluation with holes (`partial_eval`)
-   - Hole filling mechanism (`fill_holes`)
-   - Security limits (max depth, complexity)
-   - Built-in operations: arithmetic, conditionals, let bindings, lambdas
-
-### Fluent C++ API (`fluent_api.hpp`)
-
-1. **Expression Builder**
-   - `Expr` class with operator overloading for natural syntax
-   - Arithmetic operators: `+`, `-`, `*`, `/`
-   - Comparison operators returning expressions
-   - Lambda creation and application
-
-2. **Computation Classes**
-   - `Computation`: Basic evaluation and hole filling
-   - `SecureComputation`: Untrusted server workflow support
-   - Method chaining for fluent interface
-
-3. **Builder Namespace**
-   - `hole()`, `num()`, `sym()` helper functions
-   - Shorthand functions: `x()`, `y()`, `z()` for common holes
-
-### Plugin System (`plugins/plugin_interface.hpp`)
-
-1. **Plugin Interface**
-   - Base `Plugin` class for extending evaluation
-   - `EvaluationContext` provides expression and environment info
-   - `HoleFillResult` with confidence scores
-
-2. **Built-in Plugins**
-   - `PatternMatchPlugin`: Fill holes based on patterns
-   - `MathContextPlugin`: Infer mathematical constants
-   - Future: LLM integration for context-aware filling
-
-3. **Plugin Manager**
-   - Singleton for plugin registration
-   - Auto-fill toggle and confidence thresholds
-   - Priority-based plugin evaluation
-
-## Key Features
-
-### Security Properties
-- **Data Privacy**: Sensitive values never leave trusted environment
-- **Partial Evaluation**: Untrusted nodes optimize without seeing private data  
-- **Hole Tracking**: System tracks unfilled variables
-- **Algebraic Simplification**: Expressions reduce while preserving holes
-
-### Hole Syntax
-```lisp
-?variable           ; Simple hole
-?{var:constraint}   ; Hole with constraint
-(+ ?x 10)          ; Expression with hole
+```
+cmd/aperture/       # CLI entry point
+pkg/
+├── ast/            # AST types (Expr interface and node types)
+├── parser/         # Recursive descent S-expression parser
+├── eval/           # Evaluator, partial evaluator, and simplifier
+├── value/          # Value interface and concrete types
+├── env/            # Lexically scoped environments
+├── trace/          # Structured JSON tracing
+└── serialize/      # Expression serialization
+demo/query/         # HTTP client/server demo
+testdata/           # Golden test files
 ```
 
-### Fluent API Examples
-```cpp
-using namespace aperture;
-using namespace aperture::build;
+### Key Design Decisions
 
-// Natural arithmetic syntax
-auto expr = (hole("x") + num(10)) * num(2);
+1. **Value Types**: Go interface with unexported marker method (sealed interface pattern)
+2. **Partial Evaluation**: Preserves holes, blocks on hole in if predicate
+3. **Simplification**: Moderate (identity/annihilation + constant folding)
+4. **Error Handling**: Panic on errors (research prototype simplicity)
+5. **Namespaced Holes**: Support `?ns.x` for multi-party scenarios
 
-// Evaluate with hole filling
-Computation comp(expr);
-double result = comp.fill("x", 5).eval();  // = (5+10)*2 = 30
+### Running the CLI
 
-// Secure computation workflow
-SecureComputation secure(expr);
-auto optimized = secure.send_to_server();  // Partial eval
-double final = secure.fill({{"x", 5}}).eval();
-```
+```bash
+# REPL mode
+./aperture
 
-### Plugin System Usage
-```cpp
-// Register a plugin
-auto math_plugin = std::make_shared<MathContextPlugin>();
-PluginManager::instance().register_plugin(math_plugin);
+# Execute file
+./aperture run examples/query.apt
 
-// Enable auto-fill
-PluginManager::instance().set_auto_fill(true);
+# Evaluate expression
+./aperture eval "(+ 1 2)"
 
-// Holes like ?pi will be automatically filled
+# Partial evaluate
+./aperture partial examples/template.apt
+
+# Fill holes
+./aperture fill --hole x=10 --hole y=5 examples/template.apt
 ```
 
 ## Testing
 
-The codebase includes comprehensive unit and integration tests:
-- `unit_tests.cpp`: Tests arithmetic, conditionals, lambdas, let bindings
-- `integration_tests.cpp`: Tests complete workflows and security properties  
-- `validate_tests.py`: Python validation of test expectations
-- Test coverage includes comparison with Python semantics
+Golden tests in `testdata/*.apt` contain:
+- Input expression
+- Expected partial-eval result
+- Expected fill result
 
-## Notes
+Run tests: `go test ./...`
 
-- Requires C++23 compiler (GCC 13+ or Clang 16+)
-- Uses modern C++ features: `std::expected`, `std::variant`, `std::shared_ptr`
-- Secure implementation focused on privacy-preserving computation
-- Plugin system allows extensibility for hole inference (LLM integration planned)
+## Reference
+
+- Full specification: `SPEC.md`
+- Workshop paper: `paper/workshop/apertures-workshop.tex`

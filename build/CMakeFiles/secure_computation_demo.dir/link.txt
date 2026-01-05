@@ -1,1 +1,0 @@
-/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/secure_computation_demo.dir/link.d CMakeFiles/secure_computation_demo.dir/secure_computation_demo.cpp.o -o secure_computation_demo  libaperture_core.a

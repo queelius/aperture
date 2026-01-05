@@ -1,9 +1,0 @@
-<map id="aperture::build::x" name="aperture::build::x">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,139,31"/>
-<area shape="rect" id="Node000002" href="$dc/d1b/namespaceaperture_1_1build.html#a6a50c75c9bd356f7389b861115a53f80" title=" " alt="" coords="187,5,340,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,15,173,15,173,21,139,21"/>
-<area shape="rect" id="Node000003" href="$d9/ddc/classaperture_1_1Expr.html#a08e3571795fd516aae9939d952f43bae" title=" " alt="" coords="388,5,539,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="340,15,374,15,374,21,340,21"/>
-<area shape="rect" id="Node000004" href="$d9/ddc/classaperture_1_1Expr.html#ac26bb8edfdda81c4123a6e7b125f1fc0" title=" " alt="" coords="587,5,737,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="539,15,573,15,573,21,539,21"/>
-</map>
