@@ -11,125 +11,84 @@ Aperture is a minimal Lisp-like language where "holes" (written `?x` or `?ns.x`)
 ## Build Commands
 
 ```bash
-# Build the CLI
-go build -o aperture ./cmd/aperture
-
-# Run tests
-go test ./...
-
-# Run with race detector
-go test -race ./...
-
-# Run a specific package's tests
-go test ./pkg/parser/...
-
-# Run a single test by name
-go test ./pkg/eval/... -run TestPartialEval
-
-# Test coverage
-go test -coverprofile=coverage.out ./...
-go tool cover -html=coverage.out
-
-# Build and install globally
-go install ./cmd/aperture
+go build -o aperture ./cmd/aperture      # Build the CLI
+go test ./...                             # Run all tests
+go test -race ./...                       # Run with race detector
+go test ./pkg/eval/... -run TestPartialEval  # Run a single test
+go test -coverprofile=coverage.out ./...  # Test coverage
+go tool cover -html=coverage.out          # View coverage report
+go install ./cmd/aperture                 # Install globally
 ```
 
-## Code Architecture
+## Architecture
+
+### Evaluation Pipeline
+
+The core data flow is a three-phase cycle:
+
+1. **Parse** (`parser.Parse`) - S-expression string to `ast.Expr` tree
+2. **PartialEval** (`eval.PartialEval`) - Evaluate as far as possible, preserving holes; applies algebraic simplifications
+3. **Fill** (`eval.Fill`) - Substitute holes with concrete values, producing a new `ast.Expr`
+4. **Eval** (`eval.Eval`) - Full evaluation of ground expressions to `value.Value`
+
+Phases 2-4 can repeat: partial-eval, fill some holes, partial-eval again, fill more, eventually fully evaluate.
+
+### Dual-Layer Type System
+
+Two parallel type hierarchies connected by conversion functions:
+
+- **`ast.Expr`** (syntax layer): `AtomExpr`, `ListExpr`, `QuoteExpr` - used in parsing, partial evaluation, and serialization. The `AtomExpr` type is a tagged union using `AtomKind` to distinguish nil/num/sym/str/bool/hole.
+- **`value.Value`** (runtime layer): `Nil`, `Num`, `Sym`, `Str`, `Bool`, `Hole`, `List`, `Lambda` - used during full evaluation.
+
+Both use the **sealed interface pattern** (unexported marker method) to prevent external implementations.
+
+Bridge functions in `pkg/eval/partial.go`:
+- `valueToExpr(v value.Value, pos ast.Pos) ast.Expr` - runtime value back to AST node
+- `exprToValue(expr ast.Expr) value.Value` - AST node to runtime value (used by `quote`)
+
+### Partial Evaluation Strategy
+
+`PartialEval` works on AST nodes (not values). When a subexpression is ground (no holes), it tries full evaluation via `safeEval` — a panic-recovery wrapper around `Eval` that returns `nil` on failure. This lets partial evaluation optimistically attempt full evaluation without crashing on undefined variables or type errors.
+
+Algebraic simplifications (`pkg/eval/simplify.go`) are applied during partial evaluation of arithmetic:
+- **Constant folding**: `(+ 3 5)` -> `8`; also across variadic args: `(+ 3 ?x 5)` -> `(+ 8 ?x)`
+- **Identity**: `(+ 0 ?x)` -> `?x`, `(* 1 ?x)` -> `?x`
+- **Annihilation**: `(* 0 ?anything)` -> `0`
+
+### Error Handling
+
+Panics on errors throughout (research prototype). The `safeEval` function in `partial.go` uses `defer/recover` to catch panics during opportunistic evaluation within partial-eval.
 
 ### Package Structure
 
 ```
-cmd/aperture/       # CLI entry point
+cmd/aperture/       # CLI: REPL + subcommands (run, eval, partial, fill)
 pkg/
-├── ast/            # AST types (Expr interface and node types)
-├── parser/         # Recursive descent S-expression parser
-├── eval/           # Evaluator, partial evaluator, and simplifier
-├── value/          # Value interface and concrete types
-├── env/            # Lexically scoped environments
-├── trace/          # Structured JSON tracing
+├── ast/            # AST types, hole detection (HasHoles, CollectHoles)
+├── parser/         # Hand-written recursive descent S-expression parser
+├── eval/           # eval.go (full), partial.go (partial + Fill), simplify.go
+├── value/          # Runtime value types with sealed interface
+├── env/            # Lexically scoped environment chain (parent pointers)
+├── trace/          # Structured JSON tracing for fill events
 └── serialize/      # Expression serialization
-demo/query/         # HTTP client/server demo
-testdata/           # Golden test files
+demo/query/         # HTTP client/server showing the "local computation" pattern
 ```
 
-### Key Design Decisions
-
-1. **Value Types**: Go interface with unexported marker method (sealed interface pattern)
-2. **Partial Evaluation**: Preserves holes, blocks on hole in if predicate
-3. **Simplification**: Moderate (identity/annihilation + constant folding)
-4. **Error Handling**: Panic on errors (research prototype simplicity)
-5. **Namespaced Holes**: Support `?ns.x` for multi-party scenarios
-
-### Running the CLI
+### CLI
 
 ```bash
-# REPL mode
-./aperture
-
-# Execute file
-./aperture run examples/query.apt
-
-# Evaluate expression
-./aperture eval "(+ 1 2)"
-
-# Partial evaluate
-./aperture partial examples/template.apt
-
-# Fill holes
-./aperture fill --hole x=10 --hole y=5 examples/template.apt
+./aperture                                    # REPL
+./aperture eval "(+ 1 2)"                     # Full evaluation
+./aperture partial examples/template.apt      # Partial evaluation
+./aperture fill --hole x=10 --hole y=5 file.apt  # Fill holes then evaluate
+./aperture run examples/query.apt             # Execute file
 ```
 
 ## Testing
 
-Tests are in `pkg/eval/eval_test.go` using table-driven tests. Key test categories:
-- Arithmetic operations
-- Lambda and closures
-- Let bindings
-- Conditionals
-- Partial evaluation (hole preservation, simplification)
-- Hole filling
-- Hole extraction
-
-Run all tests: `go test ./...`
-
-## Library Usage
-
-```go
-import (
-    "github.com/queelius/aperture/pkg/parser"
-    "github.com/queelius/aperture/pkg/eval"
-    "github.com/queelius/aperture/pkg/env"
-    "github.com/queelius/aperture/pkg/value"
-)
-
-// Parse and evaluate
-expr, _ := parser.ParseOne("(+ 3 5)")
-e := env.Global()
-result := eval.Eval(expr, e)  // value.Num{Val: 8}
-
-// Partial evaluation
-template, _ := parser.ParseOne("(+ 3 ?x 5)")
-partial := eval.PartialEval(template, e)  // "(+ 8 ?x)"
-
-// Fill holes
-bindings := map[string]value.Value{"x": value.NewNum(10)}
-filled := eval.Fill(partial, bindings)
-final := eval.Eval(filled, e)  // 18
-```
-
-## Client-Server Demo
-
-The `demo/query/` directory shows the "local computation" pattern:
-
-```bash
-# Terminal 1: Start server
-go run ./demo/query/server
-
-# Terminal 2: Run client
-go run ./demo/query/client '(+ 3 ?x 5)' x=10
-```
+Tests are table-driven in `pkg/eval/eval_test.go`. Categories: arithmetic, lambda/closures, let bindings, conditionals, partial evaluation (hole preservation + simplification), hole filling, hole extraction, define.
 
 ## Reference
 
-- Full specification: `SPEC.md`
+- Full language specification: `SPEC.md`
 - Workshop paper: `paper/workshop/apertures-workshop.tex`
